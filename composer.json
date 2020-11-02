@@ -1,0 +1,12 @@
+{
+    "name": "davidezastawny-atimetals/software-stack",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Davide Zastawny",
+            "email": "Davide.Zastawny@ATImetals.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
