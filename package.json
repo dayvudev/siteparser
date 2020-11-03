@@ -1,6 +1,6 @@
 {
   "name": "software-stack",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "This README would normally document whatever steps are necessary to get your application up and running.",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,5 @@
     "url": "git+https://davidezastawny-atimetals@bitbucket.org/davidezastawny-atimetals/software-stack.git"
   },
   "author": "Davide Zastawny <Davide.Zastawny@ATImetals.com>",
-  "license": "ISC",
   "homepage": "https://bitbucket.org/davidezastawny-atimetals/software-stack#readme"
 }
