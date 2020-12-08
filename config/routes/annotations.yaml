@@ -1,5 +1,5 @@
-controllers:
-    resource: ../../src/Controller/
+Skeleton:
+    resource: '../../src/Skeleton/Business/Presenter/'
     type: annotation
 
 kernel:
