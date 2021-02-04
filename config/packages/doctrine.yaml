@@ -10,9 +10,9 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            AppSkeleton:
+            DatabaseComponent:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Skeleton/Resource/Entity'
-                prefix: 'App\Skeleton\Resource\Entity'
-                alias: AppSkeleton
+                dir: '%kernel.project_dir%/src/DatabaseComponent/Resource/Entity'
+                prefix: 'App\DatabaseComponent\Resource\Entity'
+                alias: DatabaseComponent
