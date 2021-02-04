@@ -1,10 +1,14 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Entity;
+namespace App\DatabaseComponent\Resource\Entity\ORM;
 
-use App\Repository\ActionRepository;
+use App\DatabaseComponent\Resource\Marker\ORMEntityInterface;
+use App\Repository\ORMActionRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use LogicException;
 
 /**
  * @ORM\Table(
@@ -19,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  * 
  * @ORM\Entity(repositoryClass=ActionRepository::class)
  */
-class Action extends AbstractEntity
+class Action implements ORMEntityInterface
 {
     /**
      * @ORM\Id
@@ -27,6 +31,11 @@ class Action extends AbstractEntity
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    protected $creationDate;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -49,11 +58,6 @@ class Action extends AbstractEntity
     private $isDisable = false;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $creationDate;
-
-    /**
      * @ORM\OneToMany(targetEntity=ParserActions::class, mappedBy="action", orphanRemoval=true)
      */
     private $parserRelations;
@@ -73,13 +77,38 @@ class Action extends AbstractEntity
     public function __construct()
     {
         $this->parserRelations = new ArrayCollection();
-
-        parent::__construct();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
+        if (null === $this->id) {
+            throw new LogicException(ORMEntityInterface::LOGIC_EXCEPTION_MESSAGE);
+        }
+
         return $this->id;
+    }
+
+    public function setId(int $value): ORMEntityInterface
+    {
+        $this->id = $value;
+        
+        return $this;
+    }
+
+    public function getCreationDate(): DateTimeInterface
+    {
+        if (null === $this->creationDate) {
+            throw new LogicException(ORMEntityInterface::LOGIC_EXCEPTION_MESSAGE);
+        }
+        
+        return $this->creationDate;
+    }
+
+    public function setCreationDate(DateTimeInterface $creationDate): self
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -180,18 +209,6 @@ class Action extends AbstractEntity
     public function setDestination(?Destination $destination): self
     {
         $this->destination = $destination;
-
-        return $this;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
 
         return $this;
     }

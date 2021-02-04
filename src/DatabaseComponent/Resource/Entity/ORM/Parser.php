@@ -1,15 +1,18 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Entity;
+namespace App\DatabaseComponent\Resource\Entity\ORM;
 
-use App\Repository\ParserRepository;
+use App\DatabaseComponent\Resource\Marker\ORMEntityInterface;
+use App\Repository\ORMParserRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use LogicException;
 
 /**
  * @ORM\Entity(repositoryClass=ParserRepository::class)
  */
-class Parser extends AbstractEntity
+class Parser implements ORMEntityInterface
 {
     /**
      * @ORM\Id
@@ -17,6 +20,11 @@ class Parser extends AbstractEntity
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    protected $creationDate;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -32,11 +40,6 @@ class Parser extends AbstractEntity
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isDisable = false;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $creationDate;
 
     /**
      * @ORM\OneToMany(targetEntity=ParserTree::class, mappedBy="parent", orphanRemoval=true)
@@ -64,13 +67,38 @@ class Parser extends AbstractEntity
         $this->parentTree = new ArrayCollection();
         $this->owners = new ArrayCollection();
         $this->actions = new ArrayCollection();
-
-        parent::__construct();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
+        if (null === $this->id) {
+            throw new LogicException(ORMEntityInterface::LOGIC_EXCEPTION_MESSAGE);
+        }
+
         return $this->id;
+    }
+
+    public function setId(int $value): ORMEntityInterface
+    {
+        $this->id = $value;
+        
+        return $this;
+    }
+
+    public function getCreationDate(): DateTimeInterface
+    {
+        if (null === $this->creationDate) {
+            throw new LogicException(ORMEntityInterface::LOGIC_EXCEPTION_MESSAGE);
+        }
+        
+        return $this->creationDate;
+    }
+
+    public function setCreationDate(DateTimeInterface $creationDate): self
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -105,18 +133,6 @@ class Parser extends AbstractEntity
     public function setIsDisable(?bool $isDisable): self
     {
         $this->isDisable = $isDisable;
-
-        return $this;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
 
         return $this;
     }

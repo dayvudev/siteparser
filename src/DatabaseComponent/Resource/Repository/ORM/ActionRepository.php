@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Repository;
+namespace App\DatabaseComponent\Resource\Repository\ORM;
 
-use App\DatabaseComponent\Resource\Entity\Action;
-use App\DatabaseComponent\Resource\Repository\RepositoryInterface;
+use App\DatabaseComponent\Resource\Entity\ORM\Action;
+use App\DatabaseComponent\Resource\Marker\ORMRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Action[]    findAll()
  * @method Action[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ActionRepository extends ServiceEntityRepository implements RepositoryInterface
+class ActionRepository extends ServiceEntityRepository implements ORMRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

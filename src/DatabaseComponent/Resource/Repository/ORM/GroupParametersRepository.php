@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Repository;
+namespace App\DatabaseComponent\Resource\Repository\ORM;
 
-use App\DatabaseComponent\Resource\Entity\GroupParameters;
+use App\DatabaseComponent\Resource\Entity\ORM\GroupParameters;
+use App\DatabaseComponent\Resource\Marker\ORMRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -11,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method GroupParameters[]    findAll()
  * @method GroupParameters[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GroupParametersRepository extends ServiceEntityRepository
+class GroupParametersRepository extends ServiceEntityRepository implements ORMRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

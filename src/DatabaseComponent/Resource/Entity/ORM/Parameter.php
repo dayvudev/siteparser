@@ -1,15 +1,18 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Entity;
+namespace App\DatabaseComponent\Resource\Entity\ORM;
 
-use App\Repository\ParameterRepository;
+use App\DatabaseComponent\Resource\Marker\ORMEntityInterface;
+use App\Repository\ORMParameterRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use LogicException;
 
 /**
  * @ORM\Entity(repositoryClass=ParameterRepository::class)
  */
-class Parameter extends AbstractEntity
+class Parameter implements ORMEntityInterface
 {
     /**
      * @ORM\Id
@@ -19,14 +22,14 @@ class Parameter extends AbstractEntity
     private $id;
 
     /**
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    protected $creationDate;
+
+    /**
      * @ORM\Column(type="string", length=100)
      */
     private $name;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $creationDate;
 
     /**
      * @ORM\OneToMany(targetEntity=Value::class, mappedBy="parameter", orphanRemoval=true)
@@ -54,13 +57,38 @@ class Parameter extends AbstractEntity
         $this->childrenRelations = new ArrayCollection();
         $this->parentRelations = new ArrayCollection();
         $this->groups = new ArrayCollection();
-
-        parent::__construct();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
+        if (null === $this->id) {
+            throw new LogicException(ORMEntityInterface::LOGIC_EXCEPTION_MESSAGE);
+        }
+
         return $this->id;
+    }
+
+    public function setId(int $value): ORMEntityInterface
+    {
+        $this->id = $value;
+        
+        return $this;
+    }
+
+    public function getCreationDate(): DateTimeInterface
+    {
+        if (null === $this->creationDate) {
+            throw new LogicException(ORMEntityInterface::LOGIC_EXCEPTION_MESSAGE);
+        }
+        
+        return $this->creationDate;
+    }
+
+    public function setCreationDate(DateTimeInterface $creationDate): self
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -71,18 +99,6 @@ class Parameter extends AbstractEntity
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
 
         return $this;
     }

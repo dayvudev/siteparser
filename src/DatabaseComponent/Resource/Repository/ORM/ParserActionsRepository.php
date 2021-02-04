@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Repository;
+namespace App\DatabaseComponent\Resource\Repository\ORM;
 
-use App\DatabaseComponent\Resource\Entity\ParserActions;
+use App\DatabaseComponent\Resource\Entity\ORM\ParserActions;
+use App\DatabaseComponent\Resource\Marker\ORMRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -11,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method ParserActions[]    findAll()
  * @method ParserActions[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ParserActionsRepository extends ServiceEntityRepository
+class ParserActionsRepository extends ServiceEntityRepository implements ORMRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
