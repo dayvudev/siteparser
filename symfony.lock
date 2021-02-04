@@ -78,6 +78,21 @@
     "exsyst/swagger": {
         "version": "v0.4.2"
     },
+    "ezyang/htmlpurifier": {
+        "version": "v4.13.0"
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
+    "laminas/laminas-code": {
+        "version": "4.0.0"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
+    },
     "maennchen/zipstream-php": {
         "version": "2.1.0"
     },
@@ -209,6 +224,18 @@
     },
     "symfony/finder": {
         "version": "v5.2.0"
+    },
+    "symfony/flex": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "c0eeb50665f0f77226616b6038a9b06c03752d8e"
+        },
+        "files": [
+            "./.env"
+        ]
     },
     "symfony/form": {
         "version": "v5.2.0"
