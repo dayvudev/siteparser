@@ -6,5 +6,5 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class AfterEvent extends Event implements ConfigurationEventInterface
 {
-    public const NAME = self::class;
+    public const NAME = 'after.configuration';
 }

@@ -6,5 +6,5 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class BeforeEvent extends Event implements ParsingEventInterface
 {
-    public const NAME = self::class;
+    public const NAME = 'after.parsing';
 }

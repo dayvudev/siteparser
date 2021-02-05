@@ -5,13 +5,25 @@ use App\DatabaseComponent\Business\Event\Adaptation\AfterEvent;
 use App\DatabaseComponent\Resource\Marker\DispatcherInterface;
 use App\DatabaseComponent\Work\Factory\Event\Adaptation\AfterEventFactory;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AfterEventDispatcher implements DispatcherInterface
 {
-    public function dispatch(): void
-    {
-        $dispatcher = new EventDispatcher();
+    private $eventDispatcher;
 
-        $dispatcher->dispatch(AfterEventFactory::create(), AfterEvent::NAME);
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    public function dispatch(): AfterEvent
+    {
+        $event = $this->eventDispatcher->dispatch(AfterEventFactory::create(), AfterEvent::NAME);
+
+        if (! $event instanceof AfterEvent) {
+            return null;
+        }
+
+        return $event;
     }
 }
