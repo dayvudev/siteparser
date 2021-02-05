@@ -24,7 +24,7 @@ class Parser implements ORMEntityInterface
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    protected $creationDate;
+    private $creationDate;
 
     /**
      * @ORM\Column(type="string", length=100)

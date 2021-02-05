@@ -22,7 +22,7 @@ class GroupParameters implements ORMEntityInterface
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    protected $creationDate;
+    private $creationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity=ParameterGroup::class, inversedBy="parameters")

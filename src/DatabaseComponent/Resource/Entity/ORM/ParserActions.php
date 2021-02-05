@@ -22,7 +22,7 @@ class ParserActions implements ORMEntityInterface
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    protected $creationDate;
+    private $creationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity=Parser::class, inversedBy="actions")

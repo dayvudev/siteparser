@@ -22,7 +22,7 @@ class Value implements ORMEntityInterface
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    protected $creationDate;
+    private $creationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity=Parameter::class, inversedBy="values")
