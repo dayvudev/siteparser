@@ -5,4 +5,5 @@ use App\DatabaseComponent\Work\WorkInterface;
 
 interface ServiceInterface extends WorkInterface
 {
+    public function execute(): void;
 }
