@@ -8,16 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use LogicException;
 
 /**
- * @ORM\Table(
- *      name="destination", 
- *      uniqueConstraints={
- *          @ORM\UniqueConstraint(
- *              name="unique_destination", 
- *              columns={"name", "handler_namespace"}
- *          )
- *      }
- * )
- * 
  * @ORM\Entity(repositoryClass=DestinationRepository::class)
  */
 class Destination implements ORMEntityInterface

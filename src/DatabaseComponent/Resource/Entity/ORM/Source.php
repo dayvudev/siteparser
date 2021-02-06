@@ -8,16 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use LogicException;
 
 /**
- * @ORM\Table(
- *      name="source", 
- *      uniqueConstraints={
- *          @ORM\UniqueConstraint(
- *              name="unique_source", 
- *              columns={"name", "handler_namespace"}
- *          )
- *      }
- * )
- * 
  * @ORM\Entity(repositoryClass=SourceRepository::class)
  */
 class Source implements ORMEntityInterface

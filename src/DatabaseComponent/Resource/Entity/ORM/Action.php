@@ -11,16 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 use LogicException;
 
 /**
- * @ORM\Table(
- *      name="action", 
- *      uniqueConstraints={
- *          @ORM\UniqueConstraint(
- *              name="unique_action", 
- *              columns={"name", "handler_namespace"}
- *          )
- *      }
- * )
- * 
  * @ORM\Entity(repositoryClass=ActionRepository::class)
  */
 class Action implements ORMEntityInterface

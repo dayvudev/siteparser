@@ -8,16 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use LogicException;
 
 /**
- * @ORM\Table(
- *      name="owner", 
- *      uniqueConstraints={
- *          @ORM\UniqueConstraint(
- *              name="unique_owner", 
- *              columns={"name"}
- *          )
- *      }
- * )
- * 
  * @ORM\Entity(repositoryClass=OwnerRepository::class)
  */
 class Owner implements ORMEntityInterface

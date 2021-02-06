@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210204210313 extends AbstractMigration
+final class Version20210206105805 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -23,16 +23,13 @@ final class Version20210204210313 extends AbstractMigration
         $this->addSql('CREATE TABLE action (id INT IDENTITY NOT NULL, source_id INT NOT NULL, destination_id INT NOT NULL, creation_date DATETIME2(6) NOT NULL, name NVARCHAR(100) NOT NULL, handler_namespace NVARCHAR(2000) NOT NULL, sort_order INT, is_disable BIT, PRIMARY KEY (id))');
         $this->addSql('CREATE INDEX IDX_47CC8C92953C1C61 ON action (source_id)');
         $this->addSql('CREATE INDEX IDX_47CC8C92816C6140 ON action (destination_id)');
-        $this->addSql('CREATE UNIQUE INDEX unique_action ON action (name, handler_namespace) WHERE name IS NOT NULL AND handler_namespace IS NOT NULL');
         $this->addSql('CREATE TABLE destination (id INT IDENTITY NOT NULL, output_id INT NOT NULL, creation_date DATETIME2(6) NOT NULL, name NVARCHAR(100) NOT NULL, handler_namespace NVARCHAR(2000) NOT NULL, PRIMARY KEY (id))');
         $this->addSql('CREATE INDEX IDX_3EC63EAADE097880 ON destination (output_id)');
-        $this->addSql('CREATE UNIQUE INDEX unique_destination ON destination (name, handler_namespace) WHERE name IS NOT NULL AND handler_namespace IS NOT NULL');
         $this->addSql('CREATE TABLE group_parameters (id INT IDENTITY NOT NULL, group_id INT NOT NULL, parameter_id INT NOT NULL, creation_date DATETIME2(6) NOT NULL, PRIMARY KEY (id))');
         $this->addSql('CREATE INDEX IDX_D15E294CFE54D947 ON group_parameters (group_id)');
         $this->addSql('CREATE INDEX IDX_D15E294C7C56DBD6 ON group_parameters (parameter_id)');
         $this->addSql('CREATE TABLE owner (id INT IDENTITY NOT NULL, parser_id INT, creation_date DATETIME2(6) NOT NULL, name NVARCHAR(100) NOT NULL, url VARCHAR(MAX) NOT NULL, PRIMARY KEY (id))');
         $this->addSql('CREATE INDEX IDX_CF60E67CF54E453B ON owner (parser_id)');
-        $this->addSql('CREATE UNIQUE INDEX unique_owner ON owner (name) WHERE name IS NOT NULL');
         $this->addSql('CREATE TABLE parameter (id INT IDENTITY NOT NULL, creation_date DATETIME2(6) NOT NULL, name NVARCHAR(100) NOT NULL, PRIMARY KEY (id))');
         $this->addSql('CREATE TABLE parameter_group (id INT IDENTITY NOT NULL, creation_date DATETIME2(6) NOT NULL, name NVARCHAR(100) NOT NULL, PRIMARY KEY (id))');
         $this->addSql('CREATE TABLE parameter_tree (id INT IDENTITY NOT NULL, parent_id INT NOT NULL, child_id INT NOT NULL, creation_date DATETIME2(6) NOT NULL, PRIMARY KEY (id))');
@@ -47,7 +44,6 @@ final class Version20210204210313 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_E457E723DD62C21B ON parser_tree (child_id)');
         $this->addSql('CREATE TABLE source (id INT IDENTITY NOT NULL, input_id INT NOT NULL, creation_date DATETIME2(6) NOT NULL, name NVARCHAR(100) NOT NULL, handler_namespace NVARCHAR(2000) NOT NULL, PRIMARY KEY (id))');
         $this->addSql('CREATE INDEX IDX_5F8A7F7336421AD6 ON source (input_id)');
-        $this->addSql('CREATE UNIQUE INDEX unique_source ON source (name, handler_namespace) WHERE name IS NOT NULL AND handler_namespace IS NOT NULL');
         $this->addSql('CREATE TABLE value (id INT IDENTITY NOT NULL, parameter_id INT NOT NULL, creation_date DATETIME2(6) NOT NULL, value VARCHAR(MAX), PRIMARY KEY (id))');
         $this->addSql('CREATE INDEX IDX_1D7758347C56DBD6 ON value (parameter_id)');
         $this->addSql('ALTER TABLE action ADD CONSTRAINT FK_47CC8C92953C1C61 FOREIGN KEY (source_id) REFERENCES source (id)');
