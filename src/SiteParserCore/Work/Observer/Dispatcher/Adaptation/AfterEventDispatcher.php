@@ -26,4 +26,9 @@ class AfterEventDispatcher implements DispatcherInterface
 
         return $event;
     }
+
+    public function getEventDispatcher(): EventDispatcherInterface
+    {
+        return $this->eventDispatcher;
+    }
 }

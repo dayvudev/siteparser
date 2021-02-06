@@ -1,16 +1,25 @@
 <?php declare(strict_types=1);
-namespace App\SiteParserCore\Work\Observer\Subscriber\Configuration;
+namespace App\GoogleSearchResultsScenario\Work\Observer\Subscriber\Configuration;
 
 use App\SiteParserCore\Business\Event\Configuration\BeforeEvent;
 use App\SiteParserCore\Business\Event\EventInterface;
 use App\SiteParserCore\Resource\Marker\Observer\SubscriberInterface;
+use Psr\Log\LoggerInterface;
 
 class BeforeEventSubscriber implements SubscriberInterface
 {
+    private $logger;
+
+    public function __construct(
+        LoggerInterface $logger
+    ) {
+        $this->logger = $logger;
+    }
+
     public static function getSubscribedEvents()
     {
         return [
-            BeforeEvent::NAME => static::SUBSCRIBER_METHOD
+            BeforeEvent::NAME => 'subscribe'
         ];
     }
 

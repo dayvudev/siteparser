@@ -10,7 +10,7 @@ class AfterEventSubscriber implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            AfterEvent::class => 'subscribe'
+            AfterEvent::NAME => static::SUBSCRIBER_METHOD
         ];
     }
 

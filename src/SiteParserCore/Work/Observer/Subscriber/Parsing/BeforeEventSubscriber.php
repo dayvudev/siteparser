@@ -10,7 +10,7 @@ class BeforeEventSubscriber implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            BeforeEvent::class => 'subscribe'
+            BeforeEvent::NAME => static::SUBSCRIBER_METHOD
         ];
     }
 
