@@ -31,9 +31,9 @@ class ExecutionService implements ExecutionServiceInterface
     ) {
         $this->beforeEventDispatcher = $beforeEventDispatcher;
         $this->afterEventDispatcher = $afterEventDispatcher;
-        $this->afterEventDispatcher = $configurationService;
-        $this->afterEventDispatcher = $parsingService;
-        $this->afterEventDispatcher = $adaptationService;
+        $this->configurationService = $configurationService;
+        $this->parsingService = $parsingService;
+        $this->adaptationService = $adaptationService;
     }
 
     public function execute(): void
