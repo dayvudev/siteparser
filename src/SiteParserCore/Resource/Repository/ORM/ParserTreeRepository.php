@@ -2,7 +2,7 @@
 namespace App\SiteParserCore\Resource\Repository\ORM;
 
 use App\SiteParserCore\Resource\Entity\ORM\ParserTree;
-use App\SiteParserCore\Resource\Marker\ORMRepositoryInterface;
+use App\SiteParserCore\Resource\Marker\Repository\ORMRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

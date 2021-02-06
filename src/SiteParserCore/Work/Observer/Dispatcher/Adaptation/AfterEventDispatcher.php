@@ -2,7 +2,7 @@
 namespace App\SiteParserCore\Work\Observer\Dispatcher\Adaptation;
 
 use App\SiteParserCore\Business\Event\Adaptation\AfterEvent;
-use App\SiteParserCore\Resource\Marker\DispatcherInterface;
+use App\SiteParserCore\Resource\Marker\Observer\DispatcherInterface;
 use App\SiteParserCore\Work\Factory\Event\Adaptation\AfterEventFactory;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

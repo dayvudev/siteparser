@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\SiteParserCore\Resource\Marker;
+namespace App\SiteParserCore\Resource\Marker\Entity;
 
+use App\SiteParserCore\Resource\Marker\MarkerInterface;
 use App\SiteParserCore\Resource\Entity\EntityInterface;
 use DateTimeInterface;
 

@@ -2,7 +2,7 @@
 namespace App\SiteParserCore\Work\Service\Execution\Step;
 
 use App\SiteParserCore\Business\Event\EventInterface;
-use App\SiteParserCore\Resource\Marker\ExecutionServiceInterface;
+use App\SiteParserCore\Resource\Marker\Service\ExecutionServiceInterface;
 use App\SiteParserCore\Work\Observer\Dispatcher\Parsing\AfterEventDispatcher;
 use App\SiteParserCore\Work\Observer\Dispatcher\Parsing\BeforeEventDispatcher;
 use Exception;

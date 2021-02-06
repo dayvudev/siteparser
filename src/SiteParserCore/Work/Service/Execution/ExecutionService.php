@@ -2,7 +2,7 @@
 namespace App\SiteParserCore\Work\Service\Execution;
 
 use App\SiteParserCore\Business\Event\EventInterface;
-use App\SiteParserCore\Resource\Marker\ExecutionServiceInterface;
+use App\SiteParserCore\Resource\Marker\Service\ExecutionServiceInterface;
 use App\SiteParserCore\Work\Observer\Dispatcher\Execution\AfterEventDispatcher;
 use App\SiteParserCore\Work\Observer\Dispatcher\Execution\BeforeEventDispatcher;
 use App\SiteParserCore\Work\Service\Execution\Step\AdaptationService;

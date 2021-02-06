@@ -2,7 +2,7 @@
 namespace App\SiteParserCore\Work\Factory\ORM\Entity;
 
 use App\SiteParserCore\Resource\Entity\ORM\Parser;
-use App\SiteParserCore\Resource\Marker\ORMEntityFactoryInterface;
+use App\SiteParserCore\Resource\Marker\Factory\ORMEntityFactoryInterface;
 
 class ParserFactory implements ORMEntityFactoryInterface
 {

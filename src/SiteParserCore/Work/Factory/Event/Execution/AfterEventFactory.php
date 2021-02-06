@@ -2,7 +2,7 @@
 namespace App\SiteParserCore\Work\Factory\Event\Execution;
 
 use App\SiteParserCore\Business\Event\Execution\AfterEvent;
-use App\SiteParserCore\Resource\Marker\ExecutionEventFactoryInterface;
+use App\SiteParserCore\Resource\Marker\Factory\ExecutionEventFactoryInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class AfterEventFactory extends Event implements ExecutionEventFactoryInterface

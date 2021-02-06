@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 namespace App\SiteParserCore\Work\Command\Execution;
 
-use App\SiteParserCore\Resource\Marker\ExecutionCommandInterface;
+use App\SiteParserCore\Resource\Marker\Command\ExecutionCommandInterface;
 use App\SiteParserCore\Work\Service\Execution\ExecutionService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

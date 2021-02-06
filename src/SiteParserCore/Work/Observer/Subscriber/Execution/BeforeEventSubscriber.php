@@ -3,7 +3,7 @@ namespace App\SiteParserCore\Work\Observer\Subscriber\Execution;
 
 use App\SiteParserCore\Business\Event\Execution\BeforeEvent;
 use App\SiteParserCore\Business\Event\EventInterface;
-use App\SiteParserCore\Resource\Marker\SubscriberInterface;
+use App\SiteParserCore\Resource\Marker\Observer\SubscriberInterface;
 
 class BeforeEventSubscriber implements SubscriberInterface
 {
