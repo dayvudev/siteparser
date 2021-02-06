@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Business\Event\Parsing;
+namespace App\SiteParserCore\Business\Event\Parsing;
 
-use App\DatabaseComponent\Resource\Marker\ParsingEventInterface;
+use App\SiteParserCore\Resource\Marker\ParsingEventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class AfterEvent extends Event implements ParsingEventInterface

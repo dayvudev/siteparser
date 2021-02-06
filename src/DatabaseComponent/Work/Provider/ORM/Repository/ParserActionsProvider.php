@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Provider\ORM\Repository;
+namespace App\SiteParserCore\Work\Provider\ORM\Repository;
 
-use App\DatabaseComponent\Resource\Marker\ORMRepositoryProviderInterface;
-use App\DatabaseComponent\Resource\Repository\ORM\ParserActionsRepository;
+use App\SiteParserCore\Resource\Marker\ORMRepositoryProviderInterface;
+use App\SiteParserCore\Resource\Repository\ORM\ParserActionsRepository;
 
 class ParserActionsProvider implements ORMRepositoryProviderInterface
 {

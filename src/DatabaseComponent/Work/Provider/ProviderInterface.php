@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Provider;
+namespace App\SiteParserCore\Work\Provider;
 
-use App\DatabaseComponent\Work\WorkInterface;
+use App\SiteParserCore\Work\WorkInterface;
 
 interface ProviderInterface extends WorkInterface
 {

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Service\Execution\Step;
+namespace App\SiteParserCore\Work\Service\Execution\Step;
 
-use App\DatabaseComponent\Business\Event\EventInterface;
-use App\DatabaseComponent\Resource\Marker\ExecutionServiceInterface;
-use App\DatabaseComponent\Work\Observer\Dispatcher\Adaptation\AfterEventDispatcher;
-use App\DatabaseComponent\Work\Observer\Dispatcher\Adaptation\BeforeEventDispatcher;
+use App\SiteParserCore\Business\Event\EventInterface;
+use App\SiteParserCore\Resource\Marker\ExecutionServiceInterface;
+use App\SiteParserCore\Work\Observer\Dispatcher\Adaptation\AfterEventDispatcher;
+use App\SiteParserCore\Work\Observer\Dispatcher\Adaptation\BeforeEventDispatcher;
 use Exception;
 
 class AdaptationService implements ExecutionServiceInterface

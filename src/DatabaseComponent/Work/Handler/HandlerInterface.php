@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Handler;
+namespace App\SiteParserCore\Work\Handler;
 
-use App\DatabaseComponent\Work\WorkInterface;
+use App\SiteParserCore\Work\WorkInterface;
 
 interface HandlerInterface extends WorkInterface
 {

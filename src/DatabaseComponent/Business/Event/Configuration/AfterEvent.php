@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Business\Event\Configuration;
+namespace App\SiteParserCore\Business\Event\Configuration;
 
-use App\DatabaseComponent\Resource\Marker\ConfigurationEventInterface;
+use App\SiteParserCore\Resource\Marker\ConfigurationEventInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class AfterEvent extends Event implements ConfigurationEventInterface

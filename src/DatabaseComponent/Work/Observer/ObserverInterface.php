@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Observer;
+namespace App\SiteParserCore\Work\Observer;
 
-use App\DatabaseComponent\Work\WorkInterface;
+use App\SiteParserCore\Work\WorkInterface;
 
 interface ObserverInterface extends WorkInterface
 {

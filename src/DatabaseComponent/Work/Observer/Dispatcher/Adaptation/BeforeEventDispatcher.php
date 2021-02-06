@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Observer\Dispatcher\Adaptation;
+namespace App\SiteParserCore\Work\Observer\Dispatcher\Adaptation;
 
-use App\DatabaseComponent\Business\Event\Adaptation\BeforeEvent;
-use App\DatabaseComponent\Resource\Marker\DispatcherInterface;
-use App\DatabaseComponent\Work\Factory\Event\Adaptation\BeforeEventFactory;
+use App\SiteParserCore\Business\Event\Adaptation\BeforeEvent;
+use App\SiteParserCore\Resource\Marker\DispatcherInterface;
+use App\SiteParserCore\Work\Factory\Event\Adaptation\BeforeEventFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BeforeEventDispatcher implements DispatcherInterface

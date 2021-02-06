@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Builder;
+namespace App\SiteParserCore\Work\Builder;
 
-use App\DatabaseComponent\Work\WorkInterface;
+use App\SiteParserCore\Work\WorkInterface;
 
 interface BuilderInterface extends WorkInterface
 {

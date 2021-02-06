@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Observer\Subscriber\Adaptation;
+namespace App\SiteParserCore\Work\Observer\Subscriber\Adaptation;
 
-use App\DatabaseComponent\Business\Event\Adaptation\BeforeEvent;
-use App\DatabaseComponent\Business\Event\EventInterface;
-use App\DatabaseComponent\Resource\Marker\SubscriberInterface;
+use App\SiteParserCore\Business\Event\Adaptation\BeforeEvent;
+use App\SiteParserCore\Business\Event\EventInterface;
+use App\SiteParserCore\Resource\Marker\SubscriberInterface;
 
 class BeforeEventSubscriber implements SubscriberInterface
 {

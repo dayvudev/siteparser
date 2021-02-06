@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Marker;
+namespace App\SiteParserCore\Resource\Marker;
 
-use App\DatabaseComponent\Resource\Repository\RepositoryInterface;
+use App\SiteParserCore\Resource\Repository\RepositoryInterface;
 
 interface ORMRepositoryInterface extends MarkerInterface, RepositoryInterface
 {

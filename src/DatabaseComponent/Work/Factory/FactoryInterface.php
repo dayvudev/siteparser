@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Factory;
+namespace App\SiteParserCore\Work\Factory;
 
-use App\DatabaseComponent\Work\WorkInterface;
+use App\SiteParserCore\Work\WorkInterface;
 
 interface FactoryInterface extends WorkInterface
 {

@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Repository;
+namespace App\SiteParserCore\Resource\Repository;
 
-use App\DatabaseComponent\Resource\ResourceInterface;
+use App\SiteParserCore\Resource\ResourceInterface;
 
 interface RepositoryInterface extends ResourceInterface
 {

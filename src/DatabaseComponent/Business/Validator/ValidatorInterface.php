@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Business\Validator;
+namespace App\SiteParserCore\Business\Validator;
 
-use App\DatabaseComponent\Business\BusinessInterface;
+use App\SiteParserCore\Business\BusinessInterface;
 
 interface ValidatorInterface extends BusinessInterface
 {

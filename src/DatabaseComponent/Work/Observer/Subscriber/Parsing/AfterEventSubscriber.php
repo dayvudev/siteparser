@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Observer\Subscriber\Parsing;
+namespace App\SiteParserCore\Work\Observer\Subscriber\Parsing;
 
-use App\DatabaseComponent\Business\Event\Parsing\AfterEvent;
-use App\DatabaseComponent\Business\Event\EventInterface;
-use App\DatabaseComponent\Resource\Marker\SubscriberInterface;
+use App\SiteParserCore\Business\Event\Parsing\AfterEvent;
+use App\SiteParserCore\Business\Event\EventInterface;
+use App\SiteParserCore\Resource\Marker\SubscriberInterface;
 
 class AfterEventSubscriber implements SubscriberInterface
 {

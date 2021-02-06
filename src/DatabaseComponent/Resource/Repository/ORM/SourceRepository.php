@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Repository\ORM;
+namespace App\SiteParserCore\Resource\Repository\ORM;
 
-use App\DatabaseComponent\Resource\Entity\ORM\Source;
-use App\DatabaseComponent\Resource\Marker\ORMRepositoryInterface;
+use App\SiteParserCore\Resource\Entity\ORM\Source;
+use App\SiteParserCore\Resource\Marker\ORMRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

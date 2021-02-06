@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Entity;
+namespace App\SiteParserCore\Resource\Entity;
 
-use App\DatabaseComponent\Resource\ResourceInterface;
+use App\SiteParserCore\Resource\ResourceInterface;
 
 interface EntityInterface extends ResourceInterface
 {

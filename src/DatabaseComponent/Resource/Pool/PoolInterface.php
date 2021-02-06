@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Pool;
+namespace App\SiteParserCore\Resource\Pool;
 
-use App\DatabaseComponent\Resource\ResourceInterface;
+use App\SiteParserCore\Resource\ResourceInterface;
 
 interface PoolInterface extends ResourceInterface
 {

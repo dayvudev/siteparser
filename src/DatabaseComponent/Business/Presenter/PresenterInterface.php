@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Business\Presenter;
+namespace App\SiteParserCore\Business\Presenter;
 
-use App\DatabaseComponent\Business\BusinessInterface;
+use App\SiteParserCore\Business\BusinessInterface;
 
 interface PresenterInterface extends BusinessInterface
 {

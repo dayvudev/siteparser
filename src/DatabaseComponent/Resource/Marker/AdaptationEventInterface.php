@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Marker;
+namespace App\SiteParserCore\Resource\Marker;
 
-use App\DatabaseComponent\Business\Event\EventInterface;
+use App\SiteParserCore\Business\Event\EventInterface;
 
 interface AdaptationEventInterface extends MarkerInterface, EventInterface
 {

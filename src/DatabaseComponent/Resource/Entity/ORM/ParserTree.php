@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Entity\ORM;
+namespace App\SiteParserCore\Resource\Entity\ORM;
 
-use App\DatabaseComponent\Resource\Marker\ORMEntityInterface;
+use App\SiteParserCore\Resource\Marker\ORMEntityInterface;
 use App\Repository\ORMParserTreeRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;

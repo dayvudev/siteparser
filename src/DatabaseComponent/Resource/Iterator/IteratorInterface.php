@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Iterator;
+namespace App\SiteParserCore\Resource\Iterator;
 
-use App\DatabaseComponent\Resource\ResourceInterface;
+use App\SiteParserCore\Resource\ResourceInterface;
 
 interface IteratorInterface extends ResourceInterface
 {

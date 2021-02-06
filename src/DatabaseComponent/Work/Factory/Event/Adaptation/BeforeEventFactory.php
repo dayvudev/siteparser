@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Factory\Event\Adaptation;
+namespace App\SiteParserCore\Work\Factory\Event\Adaptation;
 
-use App\DatabaseComponent\Business\Event\Adaptation\BeforeEvent;
-use App\DatabaseComponent\Resource\Marker\AdaptationEventFactoryInterface;
+use App\SiteParserCore\Business\Event\Adaptation\BeforeEvent;
+use App\SiteParserCore\Resource\Marker\AdaptationEventFactoryInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class BeforeEventFactory extends Event implements AdaptationEventFactoryInterface

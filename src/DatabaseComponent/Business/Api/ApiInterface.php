@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Business\Api;
+namespace App\SiteParserCore\Business\Api;
 
-use App\DatabaseComponent\Business\BusinessInterface;
+use App\SiteParserCore\Business\BusinessInterface;
 
 interface ApiInterface extends BusinessInterface
 {

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Resource\Marker;
+namespace App\SiteParserCore\Resource\Marker;
 
-use App\DatabaseComponent\Business\Event\EventInterface;
-use App\DatabaseComponent\Work\Observer\ObserverInterface;
+use App\SiteParserCore\Business\Event\EventInterface;
+use App\SiteParserCore\Work\Observer\ObserverInterface;
 
 interface DispatcherInterface extends MarkerInterface, ObserverInterface
 {

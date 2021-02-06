@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Factory\ORM\Entity;
+namespace App\SiteParserCore\Work\Factory\ORM\Entity;
 
-use App\DatabaseComponent\Resource\Entity\ORM\ParserActions;
-use App\DatabaseComponent\Resource\Marker\ORMEntityFactoryInterface;
+use App\SiteParserCore\Resource\Entity\ORM\ParserActions;
+use App\SiteParserCore\Resource\Marker\ORMEntityFactoryInterface;
 
 class ParserActionsFactory implements ORMEntityFactoryInterface
 {

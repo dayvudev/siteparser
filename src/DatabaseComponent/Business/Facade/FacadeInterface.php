@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Business\Facade;
+namespace App\SiteParserCore\Business\Facade;
 
-use App\DatabaseComponent\Business\BusinessInterface;
+use App\SiteParserCore\Business\BusinessInterface;
 
 interface FacadeInterface extends BusinessInterface
 {

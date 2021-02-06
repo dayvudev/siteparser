@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Service\Execution;
+namespace App\SiteParserCore\Work\Service\Execution;
 
-use App\DatabaseComponent\Business\Event\EventInterface;
-use App\DatabaseComponent\Resource\Marker\ExecutionServiceInterface;
-use App\DatabaseComponent\Work\Observer\Dispatcher\Execution\AfterEventDispatcher;
-use App\DatabaseComponent\Work\Observer\Dispatcher\Execution\BeforeEventDispatcher;
-use App\DatabaseComponent\Work\Service\Execution\Step\AdaptationService;
-use App\DatabaseComponent\Work\Service\Execution\Step\ConfigurationService;
-use App\DatabaseComponent\Work\Service\Execution\Step\ParsingService;
+use App\SiteParserCore\Business\Event\EventInterface;
+use App\SiteParserCore\Resource\Marker\ExecutionServiceInterface;
+use App\SiteParserCore\Work\Observer\Dispatcher\Execution\AfterEventDispatcher;
+use App\SiteParserCore\Work\Observer\Dispatcher\Execution\BeforeEventDispatcher;
+use App\SiteParserCore\Work\Service\Execution\Step\AdaptationService;
+use App\SiteParserCore\Work\Service\Execution\Step\ConfigurationService;
+use App\SiteParserCore\Work\Service\Execution\Step\ParsingService;
 use Exception;
 
 class ExecutionService implements ExecutionServiceInterface

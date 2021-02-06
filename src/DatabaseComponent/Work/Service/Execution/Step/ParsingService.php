@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Service\Execution\Step;
+namespace App\SiteParserCore\Work\Service\Execution\Step;
 
-use App\DatabaseComponent\Business\Event\EventInterface;
-use App\DatabaseComponent\Resource\Marker\ExecutionServiceInterface;
-use App\DatabaseComponent\Work\Observer\Dispatcher\Parsing\AfterEventDispatcher;
-use App\DatabaseComponent\Work\Observer\Dispatcher\Parsing\BeforeEventDispatcher;
+use App\SiteParserCore\Business\Event\EventInterface;
+use App\SiteParserCore\Resource\Marker\ExecutionServiceInterface;
+use App\SiteParserCore\Work\Observer\Dispatcher\Parsing\AfterEventDispatcher;
+use App\SiteParserCore\Work\Observer\Dispatcher\Parsing\BeforeEventDispatcher;
 use Exception;
 
 class ParsingService implements ExecutionServiceInterface
