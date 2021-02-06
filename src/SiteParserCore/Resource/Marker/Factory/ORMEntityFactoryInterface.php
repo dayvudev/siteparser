@@ -7,5 +7,5 @@ use App\SiteParserCore\Work\Factory\FactoryInterface;
 
 interface ORMEntityFactoryInterface extends MarkerInterface, FactoryInterface
 {
-    public static function create(): ORMEntityInterface;
+    public static function create(array $data = []): ORMEntityInterface;
 }
