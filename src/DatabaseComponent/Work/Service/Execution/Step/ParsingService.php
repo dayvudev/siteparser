@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Service\Execution;
+namespace App\DatabaseComponent\Work\Service\Execution\Step;
 
 use App\DatabaseComponent\Business\Event\EventInterface;
 use App\DatabaseComponent\Resource\Marker\ExecutionServiceInterface;
-use App\DatabaseComponent\Work\Observer\Dispatcher\Adaptation\AfterEventDispatcher;
-use App\DatabaseComponent\Work\Observer\Dispatcher\Adaptation\BeforeEventDispatcher;
+use App\DatabaseComponent\Work\Observer\Dispatcher\Parsing\AfterEventDispatcher;
+use App\DatabaseComponent\Work\Observer\Dispatcher\Parsing\BeforeEventDispatcher;
 use Exception;
 
-class AdaptationService implements ExecutionServiceInterface
+class ParsingService implements ExecutionServiceInterface
 {
     private $beforeEventDispatcher;
     private $afterEventDispatcher;

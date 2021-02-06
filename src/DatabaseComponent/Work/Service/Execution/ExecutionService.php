@@ -5,6 +5,9 @@ use App\DatabaseComponent\Business\Event\EventInterface;
 use App\DatabaseComponent\Resource\Marker\ExecutionServiceInterface;
 use App\DatabaseComponent\Work\Observer\Dispatcher\Execution\AfterEventDispatcher;
 use App\DatabaseComponent\Work\Observer\Dispatcher\Execution\BeforeEventDispatcher;
+use App\DatabaseComponent\Work\Service\Execution\Step\AdaptationService;
+use App\DatabaseComponent\Work\Service\Execution\Step\ConfigurationService;
+use App\DatabaseComponent\Work\Service\Execution\Step\ParsingService;
 use Exception;
 
 class ExecutionService implements ExecutionServiceInterface
@@ -15,17 +18,32 @@ class ExecutionService implements ExecutionServiceInterface
     private $beforeEvent;
     private $afterEvent;
 
+    private $configurationService;
+    private $parsingService;
+    private $adaptationService;
+
     public function __construct(
         BeforeEventDispatcher $beforeEventDispatcher,
-        AfterEventDispatcher $afterEventDispatcher
+        AfterEventDispatcher $afterEventDispatcher,
+        ConfigurationService $configurationService,
+        ParsingService $parsingService,
+        AdaptationService $adaptationService
     ) {
         $this->beforeEventDispatcher = $beforeEventDispatcher;
         $this->afterEventDispatcher = $afterEventDispatcher;
+        $this->afterEventDispatcher = $configurationService;
+        $this->afterEventDispatcher = $parsingService;
+        $this->afterEventDispatcher = $adaptationService;
     }
 
     public function execute(): void
     {
         $this->dispatchBeforeEvent();
+
+        $this->configurationService->execute();
+        $this->parsingService->execute();
+        $this->adaptationService->execute();
+
         $this->dispatchAfterEvent();
     }
     

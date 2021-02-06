@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace App\DatabaseComponent\Work\Service\Execution;
+namespace App\DatabaseComponent\Work\Service\Execution\Step;
 
 use App\DatabaseComponent\Business\Event\EventInterface;
 use App\DatabaseComponent\Resource\Marker\ExecutionServiceInterface;
