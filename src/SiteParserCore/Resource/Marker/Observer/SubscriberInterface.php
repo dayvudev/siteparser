@@ -8,7 +8,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 interface SubscriberInterface extends MarkerInterface, ObserverInterface, EventSubscriberInterface
 {
-    public const SUBSCRIBER_METHOD = 'subscribe';
-    
-    public function subscribe(EventInterface $event): void;
+    public const SUBSCRIBER_BEFORE_METHOD = 'subscribeBefore';
+    public const SUBSCRIBER_AFTER_METHOD = 'subscribeAfter';
 }

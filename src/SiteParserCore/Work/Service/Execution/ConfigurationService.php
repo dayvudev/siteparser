@@ -3,43 +3,25 @@ namespace App\SiteParserCore\Work\Service\Execution;
 
 use App\SiteParserCore\Business\Event\EventInterface;
 use App\SiteParserCore\Resource\Marker\Service\ExecutionServiceInterface;
-use App\SiteParserCore\Work\Observer\Dispatcher\ExecutionDispatcher;
-use App\SiteParserCore\Work\Service\Execution\AdaptationService;
-use App\SiteParserCore\Work\Service\Execution\ConfigurationService;
-use App\SiteParserCore\Work\Service\Execution\ParsingService;
+use App\SiteParserCore\Work\Observer\Dispatcher\ConfigurationDispatcher;
 use Exception;
 
-class ExecutionService implements ExecutionServiceInterface
+class ConfigurationService implements ExecutionServiceInterface
 {
     private $dispatcher;
 
     private $beforeEvent = null;
     private $afterEvent = null;
 
-    private $configurationService;
-    private $parsingService;
-    private $adaptationService;
-
     public function __construct(
-        ExecutionDispatcher $executionDispatcher,
-        ConfigurationService $configurationService,
-        ParsingService $parsingService,
-        AdaptationService $adaptationService
+        ConfigurationDispatcher $dispatcher
     ) {
-        $this->dispatcher = $executionDispatcher;
-        $this->configurationService = $configurationService;
-        $this->parsingService = $parsingService;
-        $this->adaptationService = $adaptationService;
+        $this->dispatcher = $dispatcher;
     }
 
     public function execute(): void
     {
         $this->dispatchBeforeEvent();
-
-        $this->configurationService->execute();
-        $this->parsingService->execute();
-        $this->adaptationService->execute();
-
         $this->dispatchAfterEvent();
     }
     

@@ -6,5 +6,5 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class BeforeEvent extends Event implements ExecutionEventInterface
 {
-    public const NAME = 'after.execution';
+    public const NAME = 'before.execution';
 }
