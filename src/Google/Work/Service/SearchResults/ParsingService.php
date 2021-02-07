@@ -8,12 +8,14 @@ use App\SiteParserCore\Resource\Entity\ORM\Source;
 use App\SiteParserCore\Resource\Entity\ORM\Parameter;
 use App\SiteParserCore\Resource\Entity\ORM\Destination;
 use App\SiteParserCore\Resource\Entity\ORM\ParameterTree;
-use App\GoogleSearchResultsScenario\Work\Service\ServiceInterface;
+use App\Google\Work\Service\ServiceInterface;
 use App\Google\Business\Definition\Configuration\SearchResultsInterface as Definition;
 
 class ParsingService implements ServiceInterface
 {
     private $entityManager;
+    private $source;
+    private $destination;
 
     public function __construct(
         EntityManagerInterface $entityManager
@@ -21,7 +23,7 @@ class ParsingService implements ServiceInterface
         $this->entityManager = $entityManager;
     }
 
-    public function execute(Source $source, Destination $destination): void
+    public function execute(): void
     {
         /** @var Parameter $keywordParameter */
         $keywordParameter = null;
@@ -29,7 +31,7 @@ class ParsingService implements ServiceInterface
         $urlParameter = null;
 
         /** @var ParameterTree $relation */
-        foreach ($source->getInput()->getChildrenRelations as $relation) {
+        foreach ($this->getSource()->getInput()->getChildrenRelations() as $relation) {
             if (Definition::NAME_INPUT_KEYWORDS === $relation->getChild()->getName()) {
                 $keywordParameter = $relation->getChild();
             }
@@ -39,12 +41,36 @@ class ParsingService implements ServiceInterface
         }
 
         if (! $keywordParameter instanceof Parameter || ! $urlParameter instanceof Parameter) {
-            throw new LogicException();
+            return;
         }
 
         /** @var Value $value */
         foreach ($urlParameter->getValues() as $value) {
 
         }
+    }
+
+    public function getSource(): ?Source
+    {
+        return $this->source;
+    }
+
+    public function setSource(Source $source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    public function getDestination(): ?Destination
+    {
+        return $this->destination;
+    }
+
+    public function setDestination(Destination $destination)
+    {
+        $this->destination = $destination;
+
+        return $this;
     }
 }
