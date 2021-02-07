@@ -39,7 +39,8 @@
         "symfony/twig-bundle": "5.*",
         "symfony/uid": "5.*",
         "symfony/validator": "5.*",
-        "symfony/yaml": "5.*"
+        "symfony/yaml": "5.*",
+        "symfony/dom-crawler": "5.*"
     },
     "autoload": {
         "psr-4": {
