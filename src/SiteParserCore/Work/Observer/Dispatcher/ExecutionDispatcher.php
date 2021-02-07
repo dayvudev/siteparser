@@ -4,9 +4,7 @@ namespace App\SiteParserCore\Work\Observer\Dispatcher;
 use App\SiteParserCore\Business\Event\Execution\BeforeEvent;
 use App\SiteParserCore\Business\Event\Execution\AfterEvent;
 use App\SiteParserCore\Resource\Marker\Observer\Dispatcher\ExecutionInterface;
-use App\SiteParserCore\Resource\Marker\Observer\DispatcherInterface;
-use App\SiteParserCore\Work\Factory\Event\Execution\BeforeEventFactory;
-use App\SiteParserCore\Work\Factory\Event\Execution\AfterEventFactory;
+use App\SiteParserCore\Work\Factory\Event\ExecutionEventFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ExecutionDispatcher implements ExecutionInterface
@@ -20,7 +18,7 @@ class ExecutionDispatcher implements ExecutionInterface
 
     public function dispatchBefore(): ?BeforeEvent
     {
-        $event = $this->eventDispatcher->dispatch(BeforeEventFactory::create(), BeforeEvent::NAME);
+        $event = $this->eventDispatcher->dispatch(ExecutionEventFactory::createBefore(), BeforeEvent::NAME);
 
         if (! $event instanceof BeforeEvent) {
             return null;
@@ -31,7 +29,7 @@ class ExecutionDispatcher implements ExecutionInterface
 
     public function dispatchAfter(): ?AfterEvent
     {
-        $event = $this->eventDispatcher->dispatch(AfterEventFactory::create(), AfterEvent::NAME);
+        $event = $this->eventDispatcher->dispatch(ExecutionEventFactory::createAfter(), AfterEvent::NAME);
 
         if (! $event instanceof AfterEvent) {
             return null;

@@ -4,9 +4,8 @@ namespace App\SiteParserCore\Work\Observer\Dispatcher;
 use App\SiteParserCore\Business\Event\Adaptation\AfterEvent;
 use App\SiteParserCore\Business\Event\Adaptation\BeforeEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use App\SiteParserCore\Work\Factory\Event\Adaptation\AfterEventFactory;
-use App\SiteParserCore\Work\Factory\Event\Adaptation\BeforeEventFactory;
 use App\SiteParserCore\Resource\Marker\Observer\Dispatcher\AdaptationInterface;
+use App\SiteParserCore\Work\Factory\Event\AdaptationEventFactory;
 
 class AdaptationDispatcher implements AdaptationInterface
 {
@@ -19,7 +18,7 @@ class AdaptationDispatcher implements AdaptationInterface
 
     public function dispatchBefore(): ?BeforeEvent
     {
-        $event = $this->eventDispatcher->dispatch(BeforeEventFactory::create(), BeforeEvent::NAME);
+        $event = $this->eventDispatcher->dispatch(AdaptationEventFactory::createBefore(), BeforeEvent::NAME);
 
         if (! $event instanceof BeforeEvent) {
             return null;
@@ -30,7 +29,7 @@ class AdaptationDispatcher implements AdaptationInterface
 
     public function dispatchAfter(): ?AfterEvent
     {
-        $event = $this->eventDispatcher->dispatch(AfterEventFactory::create(), AfterEvent::NAME);
+        $event = $this->eventDispatcher->dispatch(AdaptationEventFactory::createAfter(), AfterEvent::NAME);
 
         if (! $event instanceof AfterEvent) {
             return null;

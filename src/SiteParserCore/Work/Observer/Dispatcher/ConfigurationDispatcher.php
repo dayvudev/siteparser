@@ -4,8 +4,7 @@ namespace App\SiteParserCore\Work\Observer\Dispatcher;
 use App\SiteParserCore\Business\Event\Configuration\BeforeEvent;
 use App\SiteParserCore\Business\Event\Configuration\AfterEvent;
 use App\SiteParserCore\Resource\Marker\Observer\Dispatcher\ConfigurationInterface;
-use App\SiteParserCore\Work\Factory\Event\Configuration\BeforeEventFactory;
-use App\SiteParserCore\Work\Factory\Event\Configuration\AfterEventFactory;
+use App\SiteParserCore\Work\Factory\Event\ConfigurationEventFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ConfigurationDispatcher implements ConfigurationInterface
@@ -19,7 +18,7 @@ class ConfigurationDispatcher implements ConfigurationInterface
 
     public function dispatchBefore(): ?BeforeEvent
     {
-        $event = $this->eventDispatcher->dispatch(BeforeEventFactory::create(), BeforeEvent::NAME);
+        $event = $this->eventDispatcher->dispatch(ConfigurationEventFactory::createBefore(), BeforeEvent::NAME);
 
         if (! $event instanceof BeforeEvent) {
             return null;
@@ -30,7 +29,7 @@ class ConfigurationDispatcher implements ConfigurationInterface
 
     public function dispatchAfter(): ?AfterEvent
     {
-        $event = $this->eventDispatcher->dispatch(AfterEventFactory::create(), AfterEvent::NAME);
+        $event = $this->eventDispatcher->dispatch(ConfigurationEventFactory::createAfter(), AfterEvent::NAME);
 
         if (! $event instanceof AfterEvent) {
             return null;

@@ -6,8 +6,7 @@ use App\SiteParserCore\Business\Event\Parsing\AfterEvent;
 use App\SiteParserCore\Resource\Entity\ORM\Source;
 use App\SiteParserCore\Resource\Entity\ORM\Destination;
 use App\SiteParserCore\Resource\Marker\Observer\Dispatcher\ParsingInterface;
-use App\SiteParserCore\Work\Factory\Event\Parsing\BeforeEventFactory;
-use App\SiteParserCore\Work\Factory\Event\Parsing\AfterEventFactory;
+use App\SiteParserCore\Work\Factory\Event\ParsingEventFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ParsingDispatcher implements ParsingInterface
@@ -21,7 +20,7 @@ class ParsingDispatcher implements ParsingInterface
 
     public function dispatchBefore(Source $source, Destination $destination): ?BeforeEvent
     {
-        $event = BeforeEventFactory::create($source, $destination);
+        $event = ParsingEventFactory::createBefore($source, $destination);
         $event = $this->eventDispatcher->dispatch($event, BeforeEvent::NAME);
 
         if (! $event instanceof BeforeEvent) {
@@ -33,7 +32,7 @@ class ParsingDispatcher implements ParsingInterface
 
     public function dispatchAfter(Source $source, Destination $destination): ?AfterEvent
     {
-        $event = AfterEventFactory::create($source, $destination);
+        $event = ParsingEventFactory::createAfter($source, $destination);
         $event = $this->eventDispatcher->dispatch($event, AfterEvent::NAME);
 
         if (! $event instanceof AfterEvent) {
