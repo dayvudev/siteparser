@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace App\Google\Work\Service\Configuration;
+namespace App\Google\Work\Service\SearchResults;
 
 use App\Google\Business\Definition\Configuration\SearchResultsInterface as Definition;
 use App\Google\Work\Service\ServiceInterface;
@@ -15,7 +15,7 @@ use App\SiteParserCore\Work\Factory\ORM\Entity\ValueFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
-class SearchResultsService implements ServiceInterface
+class ConfigurationService implements ServiceInterface
 {
     private $entityManager;
 

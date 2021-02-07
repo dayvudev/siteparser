@@ -9,10 +9,10 @@ use App\SiteParserCore\Business\Event\EventInterface;
 use App\SiteParserCore\Resource\Entity\ORM\Destination;
 use App\SiteParserCore\Resource\Entity\ORM\ParserActions;
 use App\SiteParserCore\Work\Provider\ORM\Repository\OwnerProvider;
-use App\SiteParserCore\Resource\Marker\Service\ExecutionServiceInterface;
+use App\SiteParserCore\Resource\Marker\Service\ParsingServiceInterface;
 use App\SiteParserCore\Work\Observer\Dispatcher\ParsingDispatcher;
 
-class ParsingService implements ExecutionServiceInterface
+class ParsingService implements ParsingServiceInterface
 {
     /**
      * @var ParsingDispatcher

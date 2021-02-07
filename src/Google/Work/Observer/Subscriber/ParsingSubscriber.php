@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 namespace App\Google\Work\Observer\Subscriber;
 
-use App\Google\Work\Service\SearchResults\ConfigurationService;
-use App\SiteParserCore\Business\Event\Configuration\BeforeEvent;
-use App\SiteParserCore\Business\Event\Configuration\AfterEvent;
+use App\Google\Work\Service\SearchResults\ParsingService;
+use App\SiteParserCore\Business\Event\Parsing\BeforeEvent;
+use App\SiteParserCore\Business\Event\Parsing\AfterEvent;
 use App\SiteParserCore\Business\Event\EventInterface;
-use App\SiteParserCore\Resource\Marker\Observer\Subscriber\ConfigurationInterface;
+use App\SiteParserCore\Resource\Marker\Observer\Subscriber\ParsingInterface;
 
-class ConfigurationSubscriber implements ConfigurationInterface
+class ParsingSubscriber implements ParsingInterface
 {
     private $service;
 
-    public function __construct(ConfigurationService $service)
+    public function __construct(ParsingService $service)
     {
         $this->service = $service;
     }
