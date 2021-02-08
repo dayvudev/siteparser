@@ -29,6 +29,7 @@ class ConfigurationSubscriber implements ConfigurationInterface
      */
     public function subscribeBefore(EventInterface $event): void
     {
+        $this->service->execute();
     }
 
     /**

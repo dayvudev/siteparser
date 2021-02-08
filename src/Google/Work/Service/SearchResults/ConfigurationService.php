@@ -2,6 +2,7 @@
 namespace App\Google\Work\Service\SearchResults;
 
 use App\Google\Business\Definition\Configuration\SearchResultsInterface as Definition;
+use App\Google\Work\Handler\DefaultHandler;
 use App\Google\Work\Service\ServiceInterface;
 use App\SiteParserCore\Work\Factory\ORM\Entity\ActionFactory;
 use App\SiteParserCore\Work\Factory\ORM\Entity\DestinationFactory;
@@ -62,10 +63,10 @@ class ConfigurationService implements ServiceInterface
             $outputRelationWithOutputResultUrl = ParameterTreeFactory::createInline($output, $outputResultUrl);
             $this->entityManager->persist($outputRelationWithOutputResultUrl);
 
-        $source = SourceFactory::createInline($input, null, Definition::NAME_SOURCE_NAME, 'class');
+        $source = SourceFactory::createInline($input, null, Definition::NAME_SOURCE_NAME, DefaultHandler::class);
         $this->entityManager->persist($source);
 
-        $destination = DestinationFactory::createInline($output, null, Definition::NAME_DESTINATION_NAME, 'class');
+        $destination = DestinationFactory::createInline($output, null, Definition::NAME_DESTINATION_NAME, DefaultHandler::class);
         $this->entityManager->persist($destination);
 
         $action = ActionFactory::createInline($source, $destination, null, Definition::NAME_ACTION_NAME, 'class');

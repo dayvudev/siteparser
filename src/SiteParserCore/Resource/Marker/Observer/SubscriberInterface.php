@@ -2,7 +2,6 @@
 namespace App\SiteParserCore\Resource\Marker\Observer;
 
 use App\SiteParserCore\Resource\Marker\MarkerInterface;
-use App\SiteParserCore\Business\Event\EventInterface;
 use App\SiteParserCore\Work\Observer\ObserverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
