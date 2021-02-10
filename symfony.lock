@@ -1,4 +1,7 @@
 {
+    "dbrekelmans/bdi": {
+        "version": "0.3"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -123,6 +126,9 @@
     "php": {
         "version": "7.3"
     },
+    "php-webdriver/webdriver": {
+        "version": "1.9.0"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
     },
@@ -177,6 +183,9 @@
     "symfony/asset": {
         "version": "v5.2.0"
     },
+    "symfony/browser-kit": {
+        "version": "v5.2.3"
+    },
     "symfony/cache": {
         "version": "v5.2.0"
     },
@@ -198,6 +207,9 @@
             "./bin/console"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v5.2.3"
+    },
     "symfony/dependency-injection": {
         "version": "v5.2.0"
     },
@@ -206,6 +218,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v5.2.0"
+    },
+    "symfony/dom-crawler": {
+        "version": "v5.2.3"
     },
     "symfony/dotenv": {
         "version": "v5.2.0"
@@ -260,6 +275,9 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.2.3"
+    },
     "symfony/http-client-contracts": {
         "version": "v2.3.1"
     },
@@ -295,6 +313,15 @@
     },
     "symfony/options-resolver": {
         "version": "v5.2.0"
+    },
+    "symfony/panther": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "93d9baa582d0a755cc9ef81bc38a921d5fa16973"
+        }
     },
     "symfony/polyfill-ctype": {
         "version": "v1.20.0"

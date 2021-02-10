@@ -2,7 +2,7 @@
 namespace App\Google\Business\Definition\Configuration;
 
 use App\Google\Business\Definition\DefinitionInterface;
-use App\Google\Work\Handler\DefaultHandler;
+use App\Google\Work\Handler\SearchResultsHandler;
 
 interface SearchResultsInterface extends DefinitionInterface
 {
@@ -11,12 +11,12 @@ interface SearchResultsInterface extends DefinitionInterface
     public const NAME_PARSER_NAME = 'Google - Search Results';
     public const NAME_ACTION_NAME = 'Google - Search By Keyword And Feth Result Links';
     public const NAME_SOURCE_NAME = 'Google - Search Result Input Source';
-    public const NAME_SOURCE_HANDLER = DefaultHandler::class;
+    public const NAME_SOURCE_HANDLER = SearchResultsHandler::class;
     public const NAME_INPUT_INPUT = 'Google - Search Results - Input';
     public const NAME_INPUT_KEYWORDS = 'Google - Search Results - Input Keyword';
     public const NAME_INPUT_SEARCH_URL = 'Google - Search Results - Input Search Url';
     public const NAME_DESTINATION_NAME = 'Google - Search Result Output Destination';
-    public const NAME_DESTINATION_HANDLER = DefaultHandler::class;
+    public const NAME_DESTINATION_HANDLER = SearchResultsHandler::class;
     public const NAME_OUTPUT_OUTPUT = 'Google - Search Results - Output';
     public const NAME_OUTPUT_SEARCH_RESULT_TITLE = 'Google - Search Results - Output Result Title';
     public const NAME_OUTPUT_SEARCH_RESULT_URL = 'Google - Search Results - Output Result Url';

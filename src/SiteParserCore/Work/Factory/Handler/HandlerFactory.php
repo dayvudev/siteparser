@@ -9,9 +9,15 @@ use App\SiteParserCore\Resource\Marker\Factory\HandlerEntityFactoryInterface;
 
 class HandlerFactory implements HandlerEntityFactoryInterface
 {
-    public static function createArgument(array $data = []): HandlerArgumentInterface
+    public static function createArgument(array $data = [], ?HandlerResultInterface $handlerResult = null): HandlerArgumentInterface
     {
-        return new HandlerArgument($data);
+        $entity = new HandlerArgument($data);
+
+        if ($handlerResult instanceof HandlerResultInterface) {
+            $entity->setHandlerResult($handlerResult);
+        }
+
+        return $entity;
     }
 
     public static function createResult(array $data = []): HandlerResultInterface

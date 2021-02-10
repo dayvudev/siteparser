@@ -20,6 +20,14 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+    
+    App\SiteParserCore\Work\Handler\:
+        resource: '../src/SiteParserCore/Work/Handler/'
+        public: true
+    
+    App\Google\Work\Handler\:
+        resource: '../src/Google/Work/Handler/'
+        public: true
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class

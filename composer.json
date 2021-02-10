@@ -40,6 +40,13 @@
         "symfony/uid": "5.*",
         "symfony/validator": "5.*",
         "symfony/yaml": "5.*",
+        "symfony/dom-crawler": "5.*",
+        "symfony/panther": "^1.0",
+        "dbrekelmans/bdi": "^0.3.0",
+        "symfony/css-selector": "5.*"
+    },
+    "config": {
+        "bin-dir": "bin/",
         "symfony/dom-crawler": "5.*"
     },
     "autoload": {

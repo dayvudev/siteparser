@@ -7,6 +7,7 @@ use App\SiteParserCore\Work\Observer\Dispatcher\ExecutionDispatcher;
 use App\SiteParserCore\Work\Service\Execution\AdaptationService;
 use App\SiteParserCore\Work\Service\Execution\ConfigurationService;
 use App\SiteParserCore\Work\Service\Execution\ParsingService;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
 class ExecutionService implements ExecutionServiceInterface
@@ -19,27 +20,35 @@ class ExecutionService implements ExecutionServiceInterface
     private $configurationService;
     private $parsingService;
     private $adaptationService;
+    private $entityManager;
 
     public function __construct(
         ExecutionDispatcher $executionDispatcher,
         ConfigurationService $configurationService,
         ParsingService $parsingService,
-        AdaptationService $adaptationService
+        AdaptationService $adaptationService,
+        EntityManagerInterface $entityManager
     ) {
         $this->dispatcher = $executionDispatcher;
         $this->configurationService = $configurationService;
         $this->parsingService = $parsingService;
         $this->adaptationService = $adaptationService;
+        $this->entityManager = $entityManager;
     }
 
     public function execute(): void
     {
+        $this->entityManager->clear();
         $this->dispatchBeforeEvent();
 
+        $this->entityManager->clear();
         $this->configurationService->execute();
+        $this->entityManager->clear();
         $this->parsingService->execute();
+        $this->entityManager->clear();
         $this->adaptationService->execute();
 
+        $this->entityManager->clear();
         $this->dispatchAfterEvent();
     }
     

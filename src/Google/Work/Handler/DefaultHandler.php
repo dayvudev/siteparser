@@ -29,7 +29,7 @@ class DefaultHandler implements HandlerInterface
     {
         $this->entityManager->beginTransaction();
 
-        $value = ValueFactory::createInline($destination->getOutput(), null, '');
+        $value = ValueFactory::createInline($destination->getOutput(), null, '010101010101010101');
         $this->entityManager->persist($value);
 
         try {

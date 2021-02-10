@@ -37,36 +37,14 @@ class ConfigurationService implements ServiceInterface
 
         $input = ParameterFactory::createInline(null, Definition::NAME_INPUT_INPUT);
         $this->entityManager->persist($input);
-            $inputKeywords = ParameterFactory::createInline(null, Definition::NAME_INPUT_KEYWORDS);
-            $this->entityManager->persist($inputKeywords);
-                $valueTestKeyword = ValueFactory::createInline($inputKeywords, null, 'test');
-                $this->entityManager->persist($valueTestKeyword);
-                $valueTestKeyword = ValueFactory::createInline($inputKeywords, null, 'client');
-                $this->entityManager->persist($valueTestKeyword);
-            $inputUrls = ParameterFactory::createInline(null, Definition::NAME_INPUT_SEARCH_URL);
-            $this->entityManager->persist($inputUrls);
-                $valueSearchUrl = ValueFactory::createInline($inputUrls, null, 'http://www.google.com');
-                $this->entityManager->persist($valueSearchUrl);
-            $inputRelationWithInputKeywords = ParameterTreeFactory::createInline($input, $inputKeywords);
-            $this->entityManager->persist($inputRelationWithInputKeywords);
-            $inputRelationWithInputUrls = ParameterTreeFactory::createInline($input, $inputUrls);
-            $this->entityManager->persist($inputRelationWithInputUrls);
 
         $output = ParameterFactory::createInline(null, Definition::NAME_OUTPUT_OUTPUT);
         $this->entityManager->persist($output);
-            $outputResultTitle = ParameterFactory::createInline(null, Definition::NAME_OUTPUT_SEARCH_RESULT_TITLE);
-            $this->entityManager->persist($outputResultTitle);
-            $outputResultUrl = ParameterFactory::createInline(null, Definition::NAME_OUTPUT_SEARCH_RESULT_URL);
-            $this->entityManager->persist($outputResultUrl);
-            $outputRelationWithOutputResultTitle = ParameterTreeFactory::createInline($output, $outputResultTitle);
-            $this->entityManager->persist($outputRelationWithOutputResultTitle);
-            $outputRelationWithOutputResultUrl = ParameterTreeFactory::createInline($output, $outputResultUrl);
-            $this->entityManager->persist($outputRelationWithOutputResultUrl);
 
-        $source = SourceFactory::createInline($input, null, Definition::NAME_SOURCE_NAME, DefaultHandler::class);
+        $source = SourceFactory::createInline($input, null, Definition::NAME_SOURCE_NAME, Definition::NAME_SOURCE_HANDLER);
         $this->entityManager->persist($source);
 
-        $destination = DestinationFactory::createInline($output, null, Definition::NAME_DESTINATION_NAME, DefaultHandler::class);
+        $destination = DestinationFactory::createInline($output, null, Definition::NAME_DESTINATION_NAME, Definition::NAME_DESTINATION_HANDLER);
         $this->entityManager->persist($destination);
 
         $action = ActionFactory::createInline($source, $destination, null, Definition::NAME_ACTION_NAME, 'class');

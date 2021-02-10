@@ -8,6 +8,6 @@ use App\SiteParserCore\Work\Factory\FactoryInterface;
 
 interface HandlerEntityFactoryInterface extends MarkerInterface, FactoryInterface
 {
-    public static function createArgument(array $data = []): HandlerArgumentInterface;
+    public static function createArgument(array $data = [], ?HandlerResultInterface $handlerResult): HandlerArgumentInterface;
     public static function createResult(array $data = []): HandlerResultInterface;
 }

@@ -44,7 +44,7 @@ class ParsingSubscriber implements ParsingInterface
 
         $sourceResult = $handler->handleSource($event->getSource(), null);
 
-        $argument = HandlerFactory::createArgument(['sourceResult' => $sourceResult]);
+        $argument = HandlerFactory::createArgument([], $sourceResult);
         
         return $handler->handleDestination($event->getDestination(), $argument);
     }
