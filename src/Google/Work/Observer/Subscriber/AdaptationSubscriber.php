@@ -4,16 +4,14 @@ namespace App\Google\Work\Observer\Subscriber;
 use Doctrine\ORM\EntityManagerInterface;
 use App\SiteParserCore\Resource\Entity\ORM\Value;
 use App\SiteParserCore\Business\Event\EventInterface;
-use App\SiteParserCore\Resource\Entity\ORM\Parameter;
 use App\SiteParserCore\Resource\Entity\ORM\ParameterTree;
 use App\SiteParserCore\Resource\Entity\ORM\ParameterGroup;
 use App\SiteParserCore\Resource\Entity\ORM\GroupParameters;
 use App\SiteParserCore\Business\Event\Adaptation\AfterEvent;
 use App\SiteParserCore\Business\Event\Adaptation\BeforeEvent;
-use App\SiteParserCore\Work\Provider\ORM\Repository\ParameterProvider;
 use App\SiteParserCore\Work\Provider\ORM\Repository\ParameterGroupProvider;
 use App\SiteParserCore\Resource\Marker\Observer\Subscriber\AdaptationInterface;
-use App\Google\Business\Definition\Configuration\SearchResultsInterface as Definition;
+use App\Google\Business\Definition\SearchResultsInterface as Definition;
 
 class AdaptationSubscriber implements AdaptationInterface
 {
@@ -42,7 +40,7 @@ class AdaptationSubscriber implements AdaptationInterface
     public function subscribeBefore(EventInterface $event): void
     {
         /** @var ParameterGroup $parameterGroup */
-        $parameterGroup = $this->parameterGroupRepositoryProvider->provide()->findOneByName(Definition::NAME_GROUP);
+        $parameterGroup = $this->parameterGroupRepositoryProvider->provide()->findOneByName(Definition::GROUP_NAME);
 
         $file1 = fopen('google-search-results1.csv', 'w');
         $file2 = fopen('google-search-results2.csv', 'w');

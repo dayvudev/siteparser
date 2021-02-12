@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 namespace App\Google\Work\Handler;
 
-use App\Google\Business\Definition\Configuration\SearchResultsInterface as Definition;
+use App\Google\Business\Definition\SearchResultsInterface as Definition;
 use App\SiteParserCore\Resource\Entity\ORM\Destination;
 use App\SiteParserCore\Resource\Entity\ORM\GroupParameters;
 use App\SiteParserCore\Resource\Entity\ORM\ParameterTree;
@@ -90,7 +90,7 @@ class SearchResultsHandler implements HandlerInterface
 
         $resultItems = $argument->getHandlerResult()->getData('data') ?? [];
 
-        $group = ParameterGroupFactory::createInline(null, Definition::NAME_GROUP);
+        $group = ParameterGroupFactory::createInline(null, Definition::GROUP_NAME);
 
         $this->entityManager->persist($group);
 
@@ -99,8 +99,8 @@ class SearchResultsHandler implements HandlerInterface
             $rowParameter = ParameterFactory::createInline(null, 'Parameter Row (' . $i . ')');
             $rowParameterGroup = GroupParametersFactory::createInline($group, $rowParameter);
             $parameterRelation = ParameterTreeFactory::createInline($destination->getOutput(), $rowParameter);
-            $titleParameter = ParameterFactory::createInline(null, Definition::NAME_OUTPUT_SEARCH_RESULT_TITLE);
-            $urlParameter = ParameterFactory::createInline(null, Definition::NAME_OUTPUT_SEARCH_RESULT_URL);
+            $titleParameter = ParameterFactory::createInline(null, Definition::SUBOUTPUT_NAME_TITLE);
+            $urlParameter = ParameterFactory::createInline(null, Definition::SUBOUTPUT_NAME_URL);
             $titleParameterRelation = ParameterTreeFactory::createInline($rowParameter, $titleParameter);
             $urlParameterRelation = ParameterTreeFactory::createInline($rowParameter, $urlParameter);
 

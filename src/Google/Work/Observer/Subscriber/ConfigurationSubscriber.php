@@ -1,19 +1,20 @@
 <?php declare(strict_types=1);
 namespace App\Google\Work\Observer\Subscriber;
 
-use App\Google\Work\Service\SearchResults\ConfigurationService;
+use App\Google\Work\Factory\Configuration\EntityFactory;
 use App\SiteParserCore\Business\Event\Configuration\BeforeEvent;
 use App\SiteParserCore\Business\Event\Configuration\AfterEvent;
 use App\SiteParserCore\Business\Event\EventInterface;
 use App\SiteParserCore\Resource\Marker\Observer\Subscriber\ConfigurationInterface;
+use App\SiteParserCore\Work\Service\Configuration\ConfigurationService;
 
 class ConfigurationSubscriber implements ConfigurationInterface
 {
-    private $service;
+    private $configurationService;
 
-    public function __construct(ConfigurationService $service)
+    public function __construct(ConfigurationService $configurationService)
     {
-        $this->service = $service;
+        $this->configurationService = $configurationService;
     }
 
     public static function getSubscribedEvents()
@@ -29,7 +30,7 @@ class ConfigurationSubscriber implements ConfigurationInterface
      */
     public function subscribeBefore(EventInterface $event): void
     {
-        $this->service->execute();
+        $this->configurationService->execute(EntityFactory::createSearchResultsConfiguration());
     }
 
     /**
