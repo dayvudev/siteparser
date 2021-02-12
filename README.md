@@ -1,29 +1,14 @@
-# README #
+### What is this? ###
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This repository contain application written in Symfony for parsing web pages, but not only. 
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Clone this repository
+* Run `composer install`
+* Run `bin/bdi detect drivers`
+* Set up your database in `.env` file
+* Run `bin/console doctrine:migrations:migrate`
+* Run `bin/console site-parser:execution`
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+Now, You can check application result in `var/export` directory.
