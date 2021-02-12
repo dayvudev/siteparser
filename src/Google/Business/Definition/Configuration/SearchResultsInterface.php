@@ -20,4 +20,6 @@ interface SearchResultsInterface extends DefinitionInterface
     public const NAME_OUTPUT_OUTPUT = 'Google - Search Results - Output';
     public const NAME_OUTPUT_SEARCH_RESULT_TITLE = 'Google - Search Results - Output Result Title';
     public const NAME_OUTPUT_SEARCH_RESULT_URL = 'Google - Search Results - Output Result Url';
+
+    public const NAME_GROUP = 'Google Search Results';
 }

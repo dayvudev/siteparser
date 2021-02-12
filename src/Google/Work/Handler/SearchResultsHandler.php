@@ -80,16 +80,18 @@ class SearchResultsHandler implements HandlerInterface
 
     public function handleDestination(Destination $destination, ?HandlerArgumentInterface $argument): HandlerResultInterface
     {
+        if (! $argument instanceof HandlerArgumentInterface
+        ||  ! $argument->getHandlerResult() instanceof HandlerResultInterface)
+        {
+            return HandlerFactory::createResult();
+        }
+
         $this->entityManager->beginTransaction();
 
         $resultItems = $argument->getHandlerResult()->getData('data') ?? [];
 
-        $titleParameter = ParameterFactory::createInline(null, Definition::NAME_OUTPUT_SEARCH_RESULT_TITLE);
-        $urlParameter = ParameterFactory::createInline(null, Definition::NAME_OUTPUT_SEARCH_RESULT_URL);
-        $group = ParameterGroupFactory::createInline(null, 'Google Search Results');
+        $group = ParameterGroupFactory::createInline(null, Definition::NAME_GROUP);
 
-        $this->entityManager->persist($titleParameter);
-        $this->entityManager->persist($urlParameter);
         $this->entityManager->persist($group);
 
         $i = 1;
@@ -97,6 +99,8 @@ class SearchResultsHandler implements HandlerInterface
             $rowParameter = ParameterFactory::createInline(null, 'Parameter Row (' . $i . ')');
             $rowParameterGroup = GroupParametersFactory::createInline($group, $rowParameter);
             $parameterRelation = ParameterTreeFactory::createInline($destination->getOutput(), $rowParameter);
+            $titleParameter = ParameterFactory::createInline(null, Definition::NAME_OUTPUT_SEARCH_RESULT_TITLE);
+            $urlParameter = ParameterFactory::createInline(null, Definition::NAME_OUTPUT_SEARCH_RESULT_URL);
             $titleParameterRelation = ParameterTreeFactory::createInline($rowParameter, $titleParameter);
             $urlParameterRelation = ParameterTreeFactory::createInline($rowParameter, $urlParameter);
 
@@ -106,6 +110,8 @@ class SearchResultsHandler implements HandlerInterface
             $this->entityManager->persist($rowParameter);
             $this->entityManager->persist($rowParameterGroup);
             $this->entityManager->persist($parameterRelation);
+            $this->entityManager->persist($titleParameter);
+            $this->entityManager->persist($urlParameter);
             $this->entityManager->persist($titleParameterRelation);
             $this->entityManager->persist($urlParameterRelation);
             $this->entityManager->persist($title);
