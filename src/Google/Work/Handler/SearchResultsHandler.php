@@ -20,19 +20,23 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Panther\Client;
 use Symfony\Component\Panther\DomCrawler\Crawler as PantherCrawler;
 use Symfony\Component\DomCrawler\Crawler as DOMCrawler;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Throwable;
 
 class SearchResultsHandler implements HandlerInterface
 {
     private $entityManager;
     private $actionService;
+    private $slugger;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        ActionService $actionService
+        ActionService $actionService,
+        SluggerInterface $slugger
     ) {
         $this->entityManager = $entityManager;
         $this->actionService = $actionService;
+        $this->slugger = $slugger;
     }
 
     public function handleSource(Source $source, ?HandlerArgumentInterface $argument): HandlerResultInterface
@@ -42,18 +46,18 @@ class SearchResultsHandler implements HandlerInterface
         $client = Client::createChromeClient();
         $client->request('GET', 'https://google.com');
 
-        $searchKeyword = 'Site Parser';
+        $searchKeyword = 'Co się dzieje w Polsce?';
 
         /** @var PantherCrawler $pantherCrawler */
         $pantherCrawler = $client->waitFor('input[name="q"]');
         $this->actionService->fillPantherCrawlerInput($pantherCrawler, 'input[name="q"]', $searchKeyword);
 
-        $client->takeScreenshot($searchKeyword . ' - searching.png');
+        $client->takeScreenshot($this->slugger->slug($searchKeyword . ' - searching') . '.png');
         $client->executeScript('document.querySelector(\'input[aria-label="Szukaj w Google"]\').click()');
         
         /** @var PantherCrawler $pantherCrawler */
         $pantherCrawler = $client->waitFor('body');
-        $client->takeScreenshot($searchKeyword . ' - search results.png');
+        $client->takeScreenshot($this->slugger->slug($searchKeyword . ' - search results') . '.png');
 
         /** @var RemoteWebElement $element */
         $searchResultContainer = $pantherCrawler->filter('#search > div:first-of-type > div:first-of-type');
@@ -70,7 +74,8 @@ class SearchResultsHandler implements HandlerInterface
             $data = $handlerResult->getData('data');
             $data[] = [
                 'url' => $url,
-                'title' => $title
+                'title' => $title,
+                'randomNumber' => rand(0, 1000)
             ];
             $handlerResult->setData('data', $data);
         }
@@ -101,21 +106,27 @@ class SearchResultsHandler implements HandlerInterface
             $parameterRelation = ParameterTreeFactory::createInline($destination->getOutput(), $rowParameter);
             $titleParameter = ParameterFactory::createInline(null, Definition::SUBOUTPUT_NAME_TITLE);
             $urlParameter = ParameterFactory::createInline(null, Definition::SUBOUTPUT_NAME_URL);
+            $randomNumberParameter = ParameterFactory::createInline(null, Definition::SUBOUTPUT_NAME_RANDOM_NUMBER);
             $titleParameterRelation = ParameterTreeFactory::createInline($rowParameter, $titleParameter);
             $urlParameterRelation = ParameterTreeFactory::createInline($rowParameter, $urlParameter);
+            $randomNumberParameterRelation = ParameterTreeFactory::createInline($rowParameter, $randomNumberParameter);
 
             $title = ValueFactory::createInline($titleParameter, null, $item['title']);
             $url = ValueFactory::createInline($urlParameter, null, $item['url']);
+            $randomNumber = ValueFactory::createInline($randomNumberParameter, null, (string) $item['randomNumber']);
 
             $this->entityManager->persist($rowParameter);
             $this->entityManager->persist($rowParameterGroup);
             $this->entityManager->persist($parameterRelation);
             $this->entityManager->persist($titleParameter);
             $this->entityManager->persist($urlParameter);
+            $this->entityManager->persist($randomNumberParameter);
             $this->entityManager->persist($titleParameterRelation);
             $this->entityManager->persist($urlParameterRelation);
+            $this->entityManager->persist($randomNumberParameterRelation);
             $this->entityManager->persist($title);
             $this->entityManager->persist($url);
+            $this->entityManager->persist($randomNumber);
 
             $i++;
         }

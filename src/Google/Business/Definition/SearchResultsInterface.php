@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 namespace App\Google\Business\Definition;
 
-use App\Google\Business\Definition\DefinitionInterface;
 use App\Google\Work\Handler\SearchResultsHandler;
+use App\SiteParserCore\Business\Definition\DefinitionInterface;
 
 interface SearchResultsInterface extends DefinitionInterface
 {
@@ -20,6 +20,7 @@ interface SearchResultsInterface extends DefinitionInterface
 
     public const SUBOUTPUT_NAME_TITLE = 'Google - Search Results - Output Result Title';
     public const SUBOUTPUT_NAME_URL = 'Google - Search Results - Output Result Url';
+    public const SUBOUTPUT_NAME_RANDOM_NUMBER = 'Google - Search Results - Output Random Number';
 
     public const GROUP_NAME = 'Google Search Results';
 }

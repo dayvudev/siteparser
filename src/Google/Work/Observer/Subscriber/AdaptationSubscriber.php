@@ -12,18 +12,26 @@ use App\SiteParserCore\Business\Event\Adaptation\BeforeEvent;
 use App\SiteParserCore\Work\Provider\ORM\Repository\ParameterGroupProvider;
 use App\SiteParserCore\Resource\Marker\Observer\Subscriber\AdaptationInterface;
 use App\Google\Business\Definition\SearchResultsInterface as Definition;
+use App\SiteParserCore\Work\Builder\Adaptation\LiteralMapBuilder;
+use App\SiteParserCore\Work\Builder\Adaptation\MapBuilder;
 
 class AdaptationSubscriber implements AdaptationInterface
 {
     private $entityManager;
     private $parameterGroupRepositoryProvider;
+    private $mapBuilder;
+    private $literalMapBuilder;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        ParameterGroupProvider $parameterGroupRepositoryProvider
+        ParameterGroupProvider $parameterGroupRepositoryProvider,
+        MapBuilder $mapBuilder,
+        LiteralMapBuilder $literalMapBuilder
     ) {
         $this->entityManager = $entityManager;
         $this->parameterGroupRepositoryProvider = $parameterGroupRepositoryProvider;
+        $this->mapBuilder = $mapBuilder;
+        $this->literalMapBuilder = $literalMapBuilder;
     }
 
     public static function getSubscribedEvents()
@@ -40,55 +48,40 @@ class AdaptationSubscriber implements AdaptationInterface
     public function subscribeBefore(EventInterface $event): void
     {
         /** @var ParameterGroup $parameterGroup */
-        $parameterGroup = $this->parameterGroupRepositoryProvider->provide()->findOneByName(Definition::GROUP_NAME);
+        $parameterGroup = $this->parameterGroupRepositoryProvider->provide()->findOneBy([
+            'name' => Definition::GROUP_NAME
+        ], [
+            'id' => 'DESC'
+        ]);
+
+        $mapResult = $this->mapBuilder->build($parameterGroup);
 
         $file1 = fopen('google-search-results1.csv', 'w');
-        $file2 = fopen('google-search-results2.csv', 'w');
-        $json = [];
-        
-        /** @var GroupParameters $groupParameters */
-        foreach ($parameterGroup->getParameters() as $groupParameters) {
-            /** @var ParameterTree $parameterTree */
-            foreach ($groupParameters->getParameter()->getChildrenRelations() as $parameterTree) {
-                $json[$parameterTree->getChild()->getName()] = $json[$parameterTree->getChild()->getName()] ?? [];
-
-                /** @var Value $value */
-                foreach ($parameterTree->getChild()->getValues() as $value) {
-                    $json[$parameterTree->getChild()->getName()][$value->getValue()] = $value->getValue();
-                }
-            }
+        foreach ($mapResult as $rowName => $values) {
+            fputcsv($file1, array_values($values));
         }
-
-        foreach ($json as $parameterName => $values) {
-            $i = 1;
-            $json[$parameterName] = [];
-
-            foreach ($values as $value) {
-                $json[$parameterName][$value] = $i++;
-            }
-        }
-        
-        /** @var GroupParameters $groupParameters */
-        foreach ($parameterGroup->getParameters() as $groupParameters) {
-            $values1 = [];
-            $values2 = [];
-
-            /** @var ParameterTree $parameterTree */
-            foreach ($groupParameters->getParameter()->getChildrenRelations() as $parameterTree) {
-                /** @var Value $value */
-                foreach ($parameterTree->getChild()->getValues() as $value) {
-                    $values1[$parameterTree->getChild()->getName()] = $value->getValue();
-                    $values2[$parameterTree->getChild()->getName()] = $json[$parameterTree->getChild()->getName()][$value->getValue()];
-                }
-            }
-
-            fputcsv($file1, $values1);
-            fputcsv($file2, $values2);
-        }
-
         fclose($file1);
-        fclose($file2);
-        file_put_contents('google-search-results.json', json_encode($json, JSON_PRETTY_PRINT));
+
+        $literalResult = $this->literalMapBuilder->build($parameterGroup);
+
+        $file1 = fopen('google-search-results2.csv', 'w');
+        foreach ($literalResult['map'] as $rowName => $values) {
+            fputcsv($file1, array_values($values));
+        }
+        fclose($file1);
+
+        file_put_contents('google-search-results.json', json_encode($literalResult['legend'], JSON_PRETTY_PRINT));
+
+        // $file1 = fopen('google-search-results1.csv', 'w');
+        // $file2 = fopen('google-search-results2.csv', 'w');
+        // $json = [];
+
+        // fputcsv($file1, $values1);
+        // fputcsv($file2, $values2);
+        
+        // fclose($file1);
+        // fclose($file2);
+        // file_put_contents('google-search-results.json', json_encode($json, JSON_PRETTY_PRINT));
     }
 
     /**
