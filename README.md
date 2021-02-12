@@ -1,6 +1,6 @@
 ### What is this? ###
 
-This repository contain application written in Symfony for parsing web pages, but not only. 
+This repository contains application written in Symfony for parsing web pages, but not only. 
 
 ### How do I get set up? ###
 
@@ -11,4 +11,4 @@ This repository contain application written in Symfony for parsing web pages, bu
 * Run `bin/console doctrine:migrations:migrate`
 * Run `bin/console site-parser:execution`
 
-Now, You can check application result in `var/export` directory.
+Now, You can check application result in `var/external-export` directory.
