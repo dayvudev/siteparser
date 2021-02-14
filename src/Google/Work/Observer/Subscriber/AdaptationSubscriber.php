@@ -53,14 +53,26 @@ class AdaptationSubscriber implements AdaptationInterface
                 ['id' => 'DESC']
             );
 
+        if (! $parameterGroup instanceof ParameterGroup) {
+            return;
+        }
+
         $mapResult = $this->mapBuilder->build($parameterGroup);
         $this->externalExportService->setName('google-search-results');
-        $this->externalExportService->setData(ExternalExportAdapter::adaptMapBuilderResult($mapResult));
+        $this->externalExportService->setData(ExternalExportAdapter::adaptMapBuilderResultInCsvFormat($mapResult));
         $this->externalExportService->execute();
 
         $literalResult = $this->literalMapBuilder->build($parameterGroup);
         $this->externalExportService->setName('google-search-results-literal');
-        $this->externalExportService->setData(ExternalExportAdapter::adaptLiteralMapBuilderResult($literalResult));
+        $this->externalExportService->setData(ExternalExportAdapter::adaptLiteralMapBuilderResultInCsvFormat($literalResult));
+        $this->externalExportService->execute();
+        
+        $this->externalExportService->setName('google-search-results-literal-literal');
+        $this->externalExportService->setData($literalResult['literal']);
+        $this->externalExportService->execute();
+        
+        $this->externalExportService->setName('google-search-results-literal-offset');
+        $this->externalExportService->setData($literalResult['offset']);
         $this->externalExportService->execute();
     }
 

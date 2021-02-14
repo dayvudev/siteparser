@@ -86,9 +86,7 @@ class SearchResultsHandler implements HandlerInterface
         $resultItems = $argument->getHandlerResult()->getData('data') ?? [];
         $parameterGroup = $this->destinationService->createParameterGroup(Definition::GROUP_NAME);
 
-        foreach ($resultItems as $item) {
-            $this->destinationService->filleParameterGroup($parameterGroup, $item);
-        }
+        $this->destinationService->fillParameterGroup($parameterGroup, $resultItems);
 
         return HandlerFactory::createResult();
     }

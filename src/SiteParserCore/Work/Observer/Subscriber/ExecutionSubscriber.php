@@ -5,9 +5,17 @@ use App\SiteParserCore\Business\Event\Execution\BeforeEvent;
 use App\SiteParserCore\Business\Event\Execution\AfterEvent;
 use App\SiteParserCore\Business\Event\EventInterface;
 use App\SiteParserCore\Resource\Marker\Observer\Subscriber\ExecutionInterface;
+use App\SiteParserCore\Work\Service\Database\MigrationRefreshService;
 
 class ExecutionSubscriber implements ExecutionInterface
 {
+    private $migrationRefreshService;
+
+    public function __construct(MigrationRefreshService $migrationRefreshService)
+    {
+        $this->migrationRefreshService = $migrationRefreshService;
+    }
+
     public static function getSubscribedEvents()
     {
         return [
@@ -21,6 +29,7 @@ class ExecutionSubscriber implements ExecutionInterface
      */
     public function subscribeBefore(EventInterface $event): void
     {
+        $this->migrationRefreshService->execute();
     }
 
     /**

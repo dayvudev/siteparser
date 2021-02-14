@@ -29,7 +29,7 @@ class MapBuilder implements BuilderInterface
                 $map[$rowName][$childName] = $map[$rowName][$childName] ?? null;
     
                 foreach ($childrenTree->getChild()->getValues() as $value) {
-                    if (is_numeric($value->getValue())) {
+                    if ($this->isValueNumeric($value->getValue())) {
                         $map[$rowName][$childName] = (float) $value->getValue();
                     } else {
                         $map[$rowName][$childName] = $value->getValue();
@@ -41,5 +41,24 @@ class MapBuilder implements BuilderInterface
         }
 
         return $map;
+    }
+
+    private function isValueNumeric($value): bool
+    {
+        $floatValueCast = (float) $value;
+        $intValueCast = (int) $value;
+
+        $valueIsFloatIntStringFormat = strlen((string) $value) === strlen((string) $floatValueCast);
+        $valueIsIntIntStringFormat = strlen((string) $value) === strlen((string) $intValueCast);
+
+        if ($valueIsFloatIntStringFormat) {
+            $value = $floatValueCast;
+        }
+
+        if ($valueIsIntIntStringFormat) {
+            $value = $intValueCast;
+        }
+
+        return is_float($value) || is_int($value);
     }
 }

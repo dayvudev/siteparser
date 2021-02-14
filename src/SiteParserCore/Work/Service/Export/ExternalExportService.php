@@ -58,7 +58,8 @@ class ExternalExportService implements ServiceInterface
     {
         $this->csvContent = $this->serializer->serialize($this->getData(), 'csv', [
             'output_utf8_bom' => true,
-            'csv_delimiter' => ';'
+            'csv_delimiter' => ';',
+            'no_headers' => true
         ]);
 
         $this->createFile($this->csvContent, 'csv');

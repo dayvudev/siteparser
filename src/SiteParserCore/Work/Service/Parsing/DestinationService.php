@@ -1,27 +1,26 @@
 <?php declare(strict_types=1);
 namespace App\SiteParserCore\Work\Service\Parsing;
 
-use App\SiteParserCore\Resource\Entity\ORM\Destination;
 use App\SiteParserCore\Resource\Entity\ORM\ParameterGroup;
 use App\SiteParserCore\Work\Factory\ORM\Entity\GroupParametersFactory;
 use App\SiteParserCore\Work\Factory\ORM\Entity\ParameterFactory;
 use App\SiteParserCore\Work\Factory\ORM\Entity\ParameterGroupFactory;
 use App\SiteParserCore\Work\Factory\ORM\Entity\ParameterTreeFactory;
 use App\SiteParserCore\Work\Factory\ORM\Entity\ValueFactory;
-use App\SiteParserCore\Work\Provider\ORM\Repository\ParameterGroupProvider;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Uid\Uuid;
 
 class DestinationService
 {
+    public const BATCH_SIZE = 1000;
+    public const PARAMETER_ROW_PREFIX = 'Row - ';
+
     private $entityManager;
-    private $parameterGroupRepositoryProvider;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        ParameterGroupProvider $parameterGroupRepositoryProvider
+        EntityManagerInterface $entityManager
     ) {
         $this->entityManager = $entityManager;
-        $this->parameterGroupRepositoryProvider = $parameterGroupRepositoryProvider;
     }
 
     public function createParameterGroup(string $parameterGroupName): ParameterGroup
@@ -42,19 +41,38 @@ class DestinationService
         return $parameterGroup;
     }
 
+    public function fillParameterGroup(ParameterGroup $parameterGroup, array $parameterRows): void
+    {
+        $parameterRowChunks = array_chunk($parameterRows, static::BATCH_SIZE);
+
+        foreach ($parameterRowChunks as $parameterRowChunk) {
+            $this->entityManager->beginTransaction();
+
+            foreach ($parameterRowChunk as $parameterRow) {
+                $this->appendParameterRowToGroup($parameterGroup, $parameterRow);
+            }
+
+            try {
+                $this->entityManager->flush();
+                $this->entityManager->commit();
+            } catch (\Throwable $t) {
+                $this->entityManager->rollback();
+                throw $t;
+            }
+        }
+    }
+
     /**
      * @param array $data = [
      *      <parameterName> => <value>,
      *      ...
      * ]
      */
-    public function filleParameterGroup(
+    private function appendParameterRowToGroup(
         ParameterGroup $parameterGroup,
         array $data
-    ): ParameterGroup {
-        $this->entityManager->beginTransaction();
-
-        $rowParameter = ParameterFactory::createInline(null, 'Row');
+    ): void {
+        $rowParameter = ParameterFactory::createInline(null, static::PARAMETER_ROW_PREFIX . (string) Uuid::v6());
         $rowGroupParameter = GroupParametersFactory::createInline($parameterGroup, $rowParameter);
         $parameterGroup->addParameter($rowGroupParameter);
 
@@ -72,15 +90,5 @@ class DestinationService
             $this->entityManager->persist($parameterRelation);
             $this->entityManager->persist($value);
         }
-
-        try {
-            $this->entityManager->flush();
-            $this->entityManager->commit();
-        } catch (\Throwable $t) {
-            $this->entityManager->rollback();
-            throw $t;
-        }
-        
-        return $parameterGroup;
     }
 }

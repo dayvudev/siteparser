@@ -5,7 +5,7 @@ use App\SiteParserCore\Work\Adapter\AdapterInterface;
 
 class ExternalExportAdapter implements AdapterInterface
 {
-    public static function adaptMapBuilderResult(array $mapBuilderResult): array
+    public static function adaptMapBuilderResultInCsvFormat(array $mapBuilderResult): array
     {
         $headers = [];
         $headerPosition = [];
@@ -32,8 +32,8 @@ class ExternalExportAdapter implements AdapterInterface
         );
     }
 
-    public static function adaptLiteralMapBuilderResult(array $literalMapBuilderResult): array
+    public static function adaptLiteralMapBuilderResultInCsvFormat(array $literalMapBuilderResult): array
     {
-        return static::adaptMapBuilderResult($literalMapBuilderResult['map']);
+        return static::adaptMapBuilderResultInCsvFormat($literalMapBuilderResult['map']);
     }
 }
