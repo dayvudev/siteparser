@@ -3,7 +3,7 @@
 This repository contains application written in Symfony for parsing web pages, but not only. 
 
 ### How do I get set up? ###
-
+***Warning!!! After each command execution database is purging.***
 * Clone this repository
 * Run `composer install`
 * Run `bin/bdi detect drivers`
