@@ -67,12 +67,8 @@ class AdaptationSubscriber implements AdaptationInterface
         $this->externalExportService->setData(ExternalExportAdapter::adaptLiteralMapBuilderResultInCsvFormat($literalResult));
         $this->externalExportService->execute();
         
-        $this->externalExportService->setName('google-search-results-literal-literal');
-        $this->externalExportService->setData($literalResult['literal']);
-        $this->externalExportService->execute();
-        
-        $this->externalExportService->setName('google-search-results-literal-offset');
-        $this->externalExportService->setData($literalResult['offset']);
+        $this->externalExportService->setName('google-search-results-literal-legend');
+        $this->externalExportService->setData($literalResult['literal-legend']);
         $this->externalExportService->execute();
     }
 

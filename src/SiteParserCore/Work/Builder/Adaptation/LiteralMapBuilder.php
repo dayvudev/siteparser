@@ -6,7 +6,7 @@ use App\SiteParserCore\Work\Builder\BuilderInterface;
 
 class LiteralMapBuilder implements BuilderInterface
 {
-    public const OFFSET_DEFAULT_VALUE = 1;
+    public const DEFAULT_VALUE = -1;
 
     private $mapBuilder;
 
@@ -18,18 +18,13 @@ class LiteralMapBuilder implements BuilderInterface
     public function build(ParameterGroup $parameterGroup, int $mode = MapBuilder::STRING_MODE): array
     {
         $map = $this->mapBuilder->build($parameterGroup, $mode);
-        $map = $this->filterNumericValues($map);
 
-        $offsetMap = $this->getParameterOffsetMap($map);
-        $map = $this->filterOffset($map, $offsetMap);
-
-        $literalMap = $this->getParameterLiteralMap($map);
-        $map = $this->filterLiteral($map, $literalMap);
+        $literalLegend = $this->getLiteralLegend($map);
+        $map = $this->filterLiteral($map, $literalLegend);
 
         return [
-            'map' => $map,
-            'literal' => $literalMap,
-            'offset' => $offsetMap,
+            'map' => $this->filterLiteral($map, $literalLegend),
+            'literal-legend' => $literalLegend,
         ];
     }
 
@@ -38,61 +33,7 @@ class LiteralMapBuilder implements BuilderInterface
         return is_float($value) || is_int($value);
     }
 
-    private function filterNumericValues(array $map): array
-    {
-        foreach ($map as $rowName => $rowValues) {
-            foreach ($rowValues as $parameterName => $value) {
-                if (! $this->isValueNumeric($value)) {
-                    continue;
-                }
-
-                $intValue = (int) round($value);
-                $map[$rowName][$parameterName] = $intValue;
-            }
-        }
-
-        return $map;
-    }
-
-    private function getParameterOffsetMap(array $map): array
-    {
-        $offset = [];
-        $parameterStack = [];
-
-        foreach ($map as $rowName => $rowValues) {
-            foreach ($rowValues as $parameterName => $value) {
-                if (! $this->isValueNumeric($value)) {
-                    continue;
-                }
-
-                $parameterStack[$parameterName] = $parameterStack[$parameterName] ?? [];
-                $parameterStack[$parameterName][] = $value;
-            }
-        }
-
-        foreach ($parameterStack as $parameterName => $values) {
-            $offset[$parameterName] = min($values) - static::OFFSET_DEFAULT_VALUE;
-        }
-
-        return $offset;
-    }
-
-    private function filterOffset(array $map, array $offsetMap): array
-    {
-        foreach ($map as $rowName => $rowValues) {
-            foreach ($rowValues as $parameterName => $value) {
-                if (! $this->isValueNumeric($value)) {
-                    continue;
-                }
-
-                $map[$rowName][$parameterName] = $value - $offsetMap[$parameterName];
-            }
-        }
-
-        return $map;
-    }
-
-    private function getParameterLiteralMap(array $map): array
+    private function getLiteralLegend(array $map): array
     {
         $parameterIterators = [];
         $literal = [];
@@ -103,11 +44,12 @@ class LiteralMapBuilder implements BuilderInterface
                     continue;
                 }
 
-                $parameterIterators[$parameterName] = $parameterIterators[$parameterName] ?? static::OFFSET_DEFAULT_VALUE + 1;
+                $parameterIterators[$parameterName] = $parameterIterators[$parameterName] ?? static::DEFAULT_VALUE + 1;
                 $literal[$parameterName] = $literal[$parameterName] ?? [];
 
                 if (! isset($literal[$parameterName][$value])) {
-                    $literal[$parameterName][$value] = $parameterIterators[$parameterName]++;
+                    $literal[$parameterName][$value] = $parameterIterators[$parameterName];
+                    $parameterIterators[$parameterName]++;
                 }
             }
         }
@@ -119,11 +61,9 @@ class LiteralMapBuilder implements BuilderInterface
     {
         foreach ($map as $rowName => $rowValues) {
             foreach ($rowValues as $parameterName => $value) {
-                if ($this->isValueNumeric($value)) {
-                    continue;
+                if (isset($literalMap[$parameterName]) && isset($literalMap[$parameterName][$value])) {
+                    $map[$rowName][$parameterName] = $literalMap[$parameterName][$value];
                 }
-
-                $map[$rowName][$parameterName] = $literalMap[$parameterName][$value];
             }
         }
 
